@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Dashboard</title>
+  </head>
+  <body>
+    <h1>Dashboard</h1>
+
+    <a href="/reading-books/new">登録</a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Is Reading?</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="book : ${readingBooks}">
+          <td th:text="${book.title}"></td>
+          <td th:text="${book.isReading}"></td>
+          <td th:text="${book.startDate}"></td>
+          <td th:text="${book.endDate}"></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>
