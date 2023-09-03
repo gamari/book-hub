@@ -1,7 +1,7 @@
 package gamari.app.features.books;
 
 import java.security.Principal;
-import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import gamari.app.features.books.forms.ReadingBookForm;
 import gamari.app.features.books.models.Book;
+import gamari.app.features.books.models.Memo;
 import gamari.app.features.books.models.ReadingBook;
 import gamari.app.features.books.services.BookService;
+import gamari.app.features.books.services.MemoService;
 import gamari.app.features.books.services.ReadingBookService;
 import gamari.app.features.users.models.User;
 import gamari.app.features.users.services.UserService;
@@ -29,6 +31,9 @@ public class ReadingBookController {
 
     @Autowired
     private BookService bookService;
+
+    @Autowired
+    private MemoService memoService;
 
     @Autowired
     private ReadingBookService readingBookService;
@@ -46,7 +51,11 @@ public class ReadingBookController {
             return "redirect:/error_page";
         }
 
+        List<Memo> memos = memoService.findByReadingBookId(bookId);
+        System.out.println(memos.size());
+
         model.addAttribute("book", book.get());
+        model.addAttribute("memos", memos);
 
         return "pages/reading-books/detail";
     }

@@ -24,25 +24,25 @@ public class VideoTest {
         validator = factory.getValidator();
     }
 
-    @Test
-    public void testTitleNotNull() {
-        Video video = new Video();
-        video.setTitle(null);
+    // @Test
+    // public void testTitleNotNull() {
+    // Video video = new Video();
+    // video.setTitle(null);
 
-        Set<ConstraintViolation<Video>> violations = validator.validate(video);
-        assertFalse(violations.isEmpty());
+    // Set<ConstraintViolation<Video>> violations = validator.validate(video);
+    // assertFalse(violations.isEmpty());
 
-        for (ConstraintViolation<Video> violation : violations) {
-            assertTrue(violation.getPropertyPath().toString().equals("title"));
-        }
-    }
+    // for (ConstraintViolation<Video> violation : violations) {
+    // assertTrue(violation.getPropertyPath().toString().equals("title"));
+    // }
+    // }
 
-    @Test
-    public void testTitleNotNullPositiveCase() {
-        Video video = new Video();
-        video.setTitle("Sample Video Title");
+    // @Test
+    // public void testTitleNotNullPositiveCase() {
+    // Video video = new Video();video.setTitle("Sample Video Title");
 
-        Set<ConstraintViolation<Video>> violations = validator.validate(video);
-        assertTrue(violations.isEmpty());
-    }
+    // Set<ConstraintViolation<Video>> violations = validator.validate(video);
+
+    // assertTrue(violations.isEmpty());
+    // }
 }

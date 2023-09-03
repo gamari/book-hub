@@ -1,3 +1,53 @@
 @import "/css/components/header.css";
 @import "/css/components/container.css";
 @import "/css/styles.css";
+
+/* 共通 */
+.hidden {
+  display: none;
+}
+
+.active {
+  background-color: #ddd;
+}
+
+/* 詳細部分 */
+.book-detail-container {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.book-detail-container h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* 入力欄 */
+.detail-form-container {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.form-mode-container {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.form-item {
+  /* TODO 横幅いっぱいにする */
+}
+
+/* TODO リスト欄 */

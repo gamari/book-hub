@@ -32,3 +32,10 @@ CREATE TABLE IF NOT EXISTS reading_histories (
     commit_date TIMESTAMP NOT NULL,
     FOREIGN KEY (book_id) REFERENCES reading_books(id)
 );
+CREATE TABLE IF NOT EXISTS memos (
+    id UUID PRIMARY KEY NOT NULL,
+    reading_book_id UUID NOT NULL,
+    content TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (reading_book_id) REFERENCES reading_books(id)
+);

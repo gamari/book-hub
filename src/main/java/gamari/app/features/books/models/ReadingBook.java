@@ -6,7 +6,6 @@ import java.util.Date;
 @Data
 public class ReadingBook {
     private String id;
-
     private String userId;
     private String bookId;
     private String title;

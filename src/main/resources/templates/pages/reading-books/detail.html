@@ -6,13 +6,55 @@
     <link rel="stylesheet" href="/css/pages/reading-books/detail.css" />
   </head>
 
-  <body>
-    <!-- Header -->
+  <body th:data-book-id="${book.id}">
     <div th:replace="components/header :: site-header"></div>
 
-    <!-- Content -->
     <div class="container" style="margin-top: 20px">
-      <h1 th:text="${book.title}">書籍のタイトル</h1>
+      <div class="book-detail-container">
+        <div>
+          <!-- TODO 画像を表示させる -->
+          <!-- <img th:src="${book.imageUrl}" /> -->
+          Image
+        </div>
+
+        <div>
+          <h1 th:text="${book.title}">書籍のタイトル</h1>
+          <div>本棚に登録済み</div>
+          <!-- TODO まずこれをやる -->
+          <div>書籍の詳細ページへ</div>
+          <div>SHAREする</div>
+        </div>
+      </div>
+
+      <div class="detail-form-container">
+        <div class="form-mode-container">
+          <div id="memo-tab" class="tab-item active">メモ</div>
+          <div id="review-tab" class="tab-item">レビュー</div>
+        </div>
+
+        <div id="form-content">
+          <div class="form-item">
+            <form
+              id="memo-form"
+              th:action="@{/reading-books/{id}/memos(id=${book.id})}"
+              method="post"
+            >
+              <input type="text" name="content" />
+              <input type="submit" value="メモを追加" />
+            </form>
+          </div>
+
+          <div id="review-form" class="form-item hidden">
+            <form
+              th:action="@{/reading-books/{id}/reviews(id=${book.id})}"
+              method="post"
+            >
+              <input type="text" name="content" />
+              <input type="submit" value="レビューを追加" />
+            </form>
+          </div>
+        </div>
+      </div>
 
       <div class="memo-list">
         <h2>メモ一覧</h2>
@@ -24,5 +66,8 @@
         </div>
       </div>
     </div>
+
+    <!-- TODO グローバルで良くない。リファクタリングする。 -->
+    <script src="/js/readingBooks/detail.js"></script>
   </body>
 </html>
