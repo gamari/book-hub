@@ -1,3 +1,7 @@
+@import "/css/components/header.css";
+@import "/css/components/container.css";
+@import "/css/styles.css";
+
 /* ユーザーパネル */
 .user-panel-container {
   margin-top: 20px;
