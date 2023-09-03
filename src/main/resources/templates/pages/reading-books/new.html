@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>読書中の本を登録</title>
+    <!-- TODO CSSの共通化をしたい -->
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/pages/dashboard.css" />
+    <link rel="stylesheet" href="/css/components/header.css" />
+    <link rel="stylesheet" href="/css/components/container.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <div th:replace="components/header :: site-header"></div>
+
+    <!-- Content -->
+    <div class="container">
+      <h1>検索</h1>
+      <!-- TODO 実装する -->
+
+      <div>
+        <input type="text" id="searchQuery" placeholder="書籍を検索" />
+        <button onclick="searchBooks()">検索</button>
+      </div>
+
+      <!-- 検索結果表示エリア -->
+      <div id="searchResults">
+        <!-- 検索結果はこちらに表示 -->
+      </div>
+
+      <!-- 本が見つからないボタン -->
+      <div>
+        <button onclick="openModal()">本が見つからない</button>
+      </div>
+
+      <!-- モーダルダイアログ -->
+      <div id="myModal" style="display: none">
+        <div>
+          <label for="titleInput">タイトルを入力:</label>
+          <input type="text" id="titleInput" />
+          <button onclick="addReadingBookByTitle()">登録</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function searchBooks() {
+        // 書籍検索の処理（サーバーサイドと通信）
+      }
+
+      function addReadingBook(bookId) {
+        // ReadingBookテーブルに追加（サーバーサイドと通信）
+      }
+
+      function openModal() {
+        // モーダルを表示
+      }
+
+      function addReadingBookByTitle() {
+        // タイトルによってReadingBookテーブルに追加（サーバーサイドと通信）
+      }
+    </script>
+  </body>
+</html>

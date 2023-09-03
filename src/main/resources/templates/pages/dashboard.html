@@ -7,22 +7,39 @@
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/pages/dashboard.css" />
     <link rel="stylesheet" href="/css/components/header.css" />
+    <link rel="stylesheet" href="/css/components/container.css" />
   </head>
 
   <body>
+    <!-- Header -->
     <div th:replace="components/header :: site-header"></div>
-    <h1>書籍一覧</h1>
 
-    <a href="/reading-books/new">本を登録</a>
-
-    <div class="bookshelf">
-      <div th:each="book : ${readingBooks}" class="book-panel">
-        <div class="book-title" th:text="${book.title}"></div>
-        <div class="book-details">
-          <span class="is-reading" th:text="${book.isReading ? '読書中' : '読了'}"></span>
-          <span class="start-date" th:text="${book.startDate}"></span>
-          <span class="end-date" th:text="${book.endDate}"></span>
+    <!-- Content -->
+    <div class="container">
+      <div class="user-panel-container">
+        <div>
+          <div>「〇〇さん」の読活履歴</div>
         </div>
       </div>
+
+      <div class="bookshelf-container">
+        <h1>書籍一覧</h1>
+
+        <a href="/reading-books/new">本を登録</a>
+        <div class="bookshelf">
+          <div th:each="book : ${readingBooks}" class="book-panel">
+            <div class="book-title" th:text="${book.title}"></div>
+            <div class="book-details">
+              <span
+                class="is-reading"
+                th:text="${book.isReading ? '読書中' : '読了'}"
+              ></span>
+              <span class="start-date" th:text="${book.startDate}"></span>
+              <span class="end-date" th:text="${book.endDate}"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -28,7 +28,7 @@ public class ReadingBookController {
     @GetMapping("/new")
     public String newReadingBook(Model model) {
         model.addAttribute("readingBookForm", new ReadingBookForm());
-        return "reading-books/new";
+        return "pages/reading-books/new";
     }
 
     @PostMapping

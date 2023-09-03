@@ -1,3 +1,21 @@
+/* ユーザーパネル */
+.user-panel-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+/* 本棚関係 */
+.bookshelf-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
 .bookshelf {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -29,4 +47,9 @@
 .start-date,
 .end-date {
   display: block;
+}
+
+/* 中央寄せ */
+body {
+  background-color: #f9f9f9;
 }

@@ -2,12 +2,16 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #aaa;
+  border-bottom: 1px solid #ccc;
   padding: 1em;
+  background-color: rgb(23, 158, 248);
+  color: white;
 }
 
 .logo {
+  /* color: rgb(23, 158, 248); */
   font-size: 24px;
+  font-weight: 700;
 }
 
 .links {
