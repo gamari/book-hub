@@ -7,7 +7,8 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS books (
     id UUID PRIMARY KEY,
     title TEXT NOT NULL,
-    isbn TEXT NOT NULL,
+    isbn10 TEXT,
+    isbn13 TEXT,
     author TEXT,
     published_date DATE,
     genre TEXT,

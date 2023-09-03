@@ -12,6 +12,8 @@ public class ReadingBookForm {
     private String title;
     private String bookId;
     private boolean isReading;
+    private String isbn10;
+    private String isbn13;
 
     // TODO どうにかする
     @DateTimeFormat(pattern = "yyyy-MM-dd")
