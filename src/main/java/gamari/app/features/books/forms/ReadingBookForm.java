@@ -1,6 +1,5 @@
 package gamari.app.features.books.forms;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;

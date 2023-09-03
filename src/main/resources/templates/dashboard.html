@@ -1,30 +1,23 @@
 <!DOCTYPE html>
+
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>Dashboard</title>
+    <title>ダッシュボード</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
   </head>
   <body>
-    <h1>Dashboard</h1>
+    <h1>書籍一覧</h1>
 
-    <a href="/reading-books/new">登録</a>
+    <a href="/reading-books/new">本を登録</a>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Is Reading?</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr th:each="book : ${readingBooks}">
-          <td th:text="${book.title}"></td>
-          <td th:text="${book.isReading}"></td>
-          <td th:text="${book.startDate}"></td>
-          <td th:text="${book.endDate}"></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="bookshelf">
+      <div th:each="book : ${readingBooks}" class="book-panel">
+        <div class="book-title" th:text="${book.title}"></div>
+        <div class="book-details">
+          <span class="is-reading" th:text="${book.isReading ? '読書中' : '読了'}"></span>
+          <span class="start-date" th:text="${book.startDate}"></span>
+          <span class="end-date" th:text="${book.endDate}"></span>
+        </div>
+      </div>
   </body>
 </html>

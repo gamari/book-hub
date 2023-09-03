@@ -1,7 +1,6 @@
 package gamari.app.features.books.mappers;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

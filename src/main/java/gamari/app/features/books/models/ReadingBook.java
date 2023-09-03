@@ -3,8 +3,6 @@ package gamari.app.features.books.models;
 import lombok.Data;
 import java.util.Date;
 
-import jakarta.validation.constraints.NotNull;
-
 @Data
 public class ReadingBook {
     private String id;
