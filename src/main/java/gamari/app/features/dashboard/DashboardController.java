@@ -28,6 +28,6 @@ public class DashboardController {
         User user = userService.findByUsername(username);
         List<ReadingBook> readingBooks = readingBookService.findByUserId(user.getId());
         model.addAttribute("readingBooks", readingBooks);
-        return "dashboard";
+        return "pages/dashboard";
     }
 }
