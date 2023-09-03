@@ -1,21 +1,21 @@
 CREATE TABLE IF NOT EXISTS users (
-    id UUID PRIMARY KEY,
+    id UUID PRIMARY KEY NOT NULL,
     username TEXT NOT NULL UNIQUE,
     password TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE
 );
 CREATE TABLE IF NOT EXISTS books (
-    id UUID PRIMARY KEY,
+    id UUID PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
-    isbn10 TEXT,
-    isbn13 TEXT,
+    isbn10 TEXT UNIQUE,
+    isbn13 TEXT UNIQUE,
     author TEXT,
     published_date DATE,
     genre TEXT,
     summary TEXT
 );
 CREATE TABLE IF NOT EXISTS reading_books (
-    id UUID PRIMARY KEY,
+    id UUID PRIMARY KEY NOT NULL,
     user_id UUID NOT NULL,
     book_id UUID,
     title TEXT,
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS reading_books (
     FOREIGN KEY (book_id) REFERENCES books(id)
 );
 CREATE TABLE IF NOT EXISTS reading_histories (
-    id UUID PRIMARY KEY,
+    id UUID PRIMARY KEY NOT NULL,
     book_id UUID NOT NULL,
     note TEXT,
     commit_date TIMESTAMP NOT NULL,

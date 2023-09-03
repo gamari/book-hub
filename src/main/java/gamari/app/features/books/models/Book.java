@@ -9,14 +9,9 @@ import jakarta.validation.constraints.NotNull;
 @Data
 public class Book {
     private String id;
-
-    @NotNull
     private String title;
-
-    @NotNull
     private String isbn10;
     private String isbn13;
-
     private String author;
     private Date publishedDate;
     private String genre;

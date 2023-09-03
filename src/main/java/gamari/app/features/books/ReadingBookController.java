@@ -1,6 +1,8 @@
 package gamari.app.features.books;
 
 import java.security.Principal;
+import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +27,7 @@ public class ReadingBookController {
     UserService userService;
 
     @Autowired
-    BookService bookService;
+    private BookService bookService;
 
     @Autowired
     private ReadingBookService readingBookService;
@@ -38,24 +40,19 @@ public class ReadingBookController {
 
     @PostMapping
     public String createReadingBook(@ModelAttribute ReadingBookForm readingBookForm, Principal principal) {
-        System.out.println("AAAAAA");
         String username = principal.getName();
         User user = userService.findByUsername(username);
 
-        Book book = new Book();
-        book.setTitle(readingBookForm.getTitle());
-        book.setIsbn10(readingBookForm.getIsbn10());
-        book.setIsbn13(readingBookForm.getIsbn13());
-        System.out.println(book.getIsbn13());
+        Book book = bookService.getOrCreateBook(readingBookForm.getTitle(), readingBookForm.getIsbn10(),
+                readingBookForm.getIsbn13());
 
-        // bookService.save(book); // bookServiceは適切にAutowiredされる
+        if (readingBookService.isAlreadyReadingBook(book.getId(), user.getId())) {
+            return "redirect:/error_page";
+        }
 
-        ReadingBook readingBook = new ReadingBook();
-        readingBook.setBookId(book.getId());
-        readingBook.setUserId(user.getId());
-
-        // readingBookService.save(readingBook);
+        readingBookService.saveReadingBook(user, book);
 
         return "redirect:/dashboard";
     }
+
 }
