@@ -35,6 +35,12 @@ function displayBookInfo(book) {
     isbn13Input.value = isbn_13;
     bookForm.appendChild(isbn13Input);
 
+    const thumbnailInput = document.createElement("input");
+    thumbnailInput.type = "hidden";
+    thumbnailInput.name = "thumbnail";
+    thumbnailInput.value = thumbnail;
+    bookForm.appendChild(thumbnailInput);
+
     const submitButton = document.createElement("input");
     submitButton.type = "submit";
     submitButton.value = "登録";

@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS books (
     author TEXT,
     published_date DATE,
     genre TEXT,
+    thumbnail TEXT,
     summary TEXT
 );
 CREATE TABLE IF NOT EXISTS reading_books (

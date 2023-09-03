@@ -2,23 +2,21 @@
 
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title th:text="${book.title}"></title>
+    <title th:text="${reading_book.title}"></title>
     <link rel="stylesheet" href="/css/pages/reading-books/detail.css" />
   </head>
 
-  <body th:data-book-id="${book.id}">
+  <body th:data-book-id="${reading_book.id}">
     <div th:replace="components/header :: site-header"></div>
 
     <div class="container" style="margin-top: 20px">
       <div class="book-detail-container">
         <div>
-          <!-- TODO 画像を表示させる -->
-          <!-- <img th:src="${book.imageUrl}" /> -->
-          Image
+          <img alt="image" th:src="${book.thumbnail}" />
         </div>
 
         <div>
-          <h1 th:text="${book.title}">書籍のタイトル</h1>
+          <h1 th:text="${reading_book.title}">書籍のタイトル</h1>
           <div>本棚に登録済み</div>
           <!-- TODO まずこれをやる -->
           <div>書籍の詳細ページへ</div>
@@ -36,7 +34,7 @@
           <div class="form-item">
             <form
               id="memo-form"
-              th:action="@{/reading-books/{id}/memos(id=${book.id})}"
+              th:action="@{/reading-books/{id}/memos(id=${reading_book.id})}"
               method="post"
             >
               <input type="text" name="content" />
@@ -46,7 +44,7 @@
 
           <div id="review-form" class="form-item hidden">
             <form
-              th:action="@{/reading-books/{id}/reviews(id=${book.id})}"
+              th:action="@{/reading-books/{id}/reviews(id=${reading_book.id})}"
               method="post"
             >
               <input type="text" name="content" />
@@ -56,18 +54,17 @@
         </div>
       </div>
 
-      <div class="memo-list">
-        <h2>メモ一覧</h2>
-
+      <div class="memo-list-container">
         <div th:each="memo : ${memos}">
           <div class="memo-item">
             <span th:text="${memo.content}"></span>
           </div>
         </div>
+
+        <div th:if="${#lists.isEmpty(memos)}">メモを追加してみましょう</div>
       </div>
     </div>
 
-    <!-- TODO グローバルで良くない。リファクタリングする。 -->
     <script src="/js/readingBooks/detail.js"></script>
   </body>
 </html>

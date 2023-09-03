@@ -37,7 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
             .then(response => response.json())
             .then(data => {
                 console.log('Success:', data);
-                // 更新されたメモを表示するコードをここに書く
+                const memoListContainer = document.querySelector('.memo-list-container');
+                const newMemo = document.createElement('div');
+                newMemo.className = 'memo-item';
+                newMemo.innerHTML = `<span>${data.content}</span>`;
+                memoListContainer.prepend(newMemo);
             })
             .catch((error) => {
                 console.error('Error:', error);

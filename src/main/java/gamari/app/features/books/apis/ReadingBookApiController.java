@@ -20,14 +20,14 @@ public class ReadingBookApiController {
     @Autowired
     private MemoService memoService;
 
+    // TODO memoを返したい
     @PostMapping("/{id}/memos")
-    public ResponseEntity<String> createMemo(@PathVariable String id, @RequestBody Memo memo) {
-        System.out.println("AAAAAA");
+    public ResponseEntity<Memo> createMemo(@PathVariable String id, @RequestBody Memo memo) {
         // TODO ReadingBookのユーザーのみ登録可能
         memo.setId(UUID.randomUUID().toString());
         memo.setReadingBookId(id);
         memo.setCreatedAt(new Date());
         memoService.save(memo);
-        return ResponseEntity.ok("Memo created successfully.");
+        return ResponseEntity.ok(memo);
     }
 }

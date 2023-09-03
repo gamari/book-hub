@@ -12,6 +12,7 @@ public class Book {
     private String title;
     private String isbn10;
     private String isbn13;
+    private String thumbnail;
     private String author;
     private Date publishedDate;
     private String genre;

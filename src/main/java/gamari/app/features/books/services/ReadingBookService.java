@@ -18,12 +18,12 @@ public class ReadingBookService {
     @Autowired
     private ReadingBookMapper readingBookMapper;
 
-    public List<ReadingBook> findByUserId(String userId) {
-        return readingBookMapper.findByUserId(userId);
-    }
-
     public Optional<ReadingBook> findById(String id) {
         return readingBookMapper.findById(id);
+    }
+
+    public List<ReadingBook> findByUserId(String userId) {
+        return readingBookMapper.findByUserId(userId);
     }
 
     public void save(ReadingBook newReadingBook) {

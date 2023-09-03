@@ -14,8 +14,8 @@ public class ReadingBookForm {
     private boolean isReading;
     private String isbn10;
     private String isbn13;
+    private String thumbnail;
 
-    // TODO どうにかする
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 

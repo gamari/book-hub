@@ -46,15 +46,22 @@ public class ReadingBookController {
 
     @GetMapping("/{bookId}")
     public String showBookDetail(@PathVariable String bookId, Model model) {
-        Optional<ReadingBook> book = readingBookService.findById(bookId);
-        if (book.isEmpty()) {
+        Optional<ReadingBook> optReadingBook = readingBookService.findById(bookId);
+
+        if (optReadingBook.isEmpty()) {
+            // TODO エラー表示させる
             return "redirect:/error_page";
         }
 
+        ReadingBook readingBook = optReadingBook.get();
+        System.out.println(readingBook.getId());
+        System.out.println(readingBook.getBookId());
+
+        Optional<Book> book = bookService.findBookById(readingBook.getBookId());
         List<Memo> memos = memoService.findByReadingBookId(bookId);
-        System.out.println(memos.size());
 
         model.addAttribute("book", book.get());
+        model.addAttribute("reading_book", readingBook);
         model.addAttribute("memos", memos);
 
         return "pages/reading-books/detail";
@@ -65,8 +72,7 @@ public class ReadingBookController {
         String username = principal.getName();
         User user = userService.findByUsername(username);
 
-        Book book = bookService.getOrCreateBook(readingBookForm.getTitle(), readingBookForm.getIsbn10(),
-                readingBookForm.getIsbn13());
+        Book book = bookService.getOrCreateBook(readingBookForm);
 
         if (readingBookService.isAlreadyReadingBook(book.getId(), user.getId())) {
             return "redirect:/error_page";

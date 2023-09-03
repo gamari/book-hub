@@ -51,3 +51,21 @@
 }
 
 /* TODO リスト欄 */
+.memo-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: white;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.memo-item {
+  background: rgb(235, 252, 242);
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
