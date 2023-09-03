@@ -2,6 +2,7 @@ package gamari.app.features.books.services;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,10 @@ public class ReadingBookService {
 
     public List<ReadingBook> findByUserId(String userId) {
         return readingBookMapper.findByUserId(userId);
+    }
+
+    public Optional<ReadingBook> findById(String id) {
+        return readingBookMapper.findById(id);
     }
 
     public void save(ReadingBook newReadingBook) {

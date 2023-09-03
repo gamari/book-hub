@@ -1,6 +1,7 @@
 package gamari.app.features.books.mappers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
@@ -11,6 +12,10 @@ import gamari.app.features.books.models.ReadingBook;
 
 @Mapper
 public interface ReadingBookMapper {
+
+    @Select("SELECT * FROM reading_books where id = #{id}")
+    Optional<ReadingBook> findById(String id);
+
     @Select("SELECT * FROM reading_books where user_id = #{userId}")
     List<ReadingBook> findByUserId(String id);
 

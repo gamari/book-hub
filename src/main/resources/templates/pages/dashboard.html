@@ -26,9 +26,15 @@
         <h1>書籍一覧</h1>
 
         <a href="/reading-books/new">本を登録</a>
+
+        <!-- 本棚 -->
         <div class="bookshelf">
           <div th:each="book : ${readingBooks}" class="book-panel">
-            <div class="book-title" th:text="${book.title}"></div>
+            <a
+              th:href="@{/reading-books/{id}(id=${book.id})}"
+              class="book-title"
+              th:text="${book.title}"
+            ></a>
             <div class="book-details">
               <span
                 class="is-reading"

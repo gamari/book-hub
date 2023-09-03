@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -36,6 +37,18 @@ public class ReadingBookController {
     public String newReadingBook(Model model) {
         model.addAttribute("readingBookForm", new ReadingBookForm());
         return "pages/reading-books/new";
+    }
+
+    @GetMapping("/{bookId}")
+    public String showBookDetail(@PathVariable String bookId, Model model) {
+        Optional<ReadingBook> book = readingBookService.findById(bookId);
+        if (book.isEmpty()) {
+            return "redirect:/error_page";
+        }
+
+        model.addAttribute("book", book.get());
+
+        return "pages/reading-books/detail";
     }
 
     @PostMapping
