@@ -3,6 +3,7 @@ package gamari.app.features.books.apis;
 import java.security.Principal;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import gamari.app.features.books.models.Book;
 import gamari.app.features.books.models.Memo;
+import gamari.app.features.books.services.BookService;
 import gamari.app.features.books.services.MemoService;
+import gamari.app.features.books.services.ReadingBookRegistrationService;
 import gamari.app.features.books.services.ReadingBookService;
 import gamari.app.features.users.models.User;
 import gamari.app.features.users.services.UserService;
@@ -26,10 +30,13 @@ public class ReadingBookApiController {
     UserService userService;
 
     @Autowired
+    BookService bookService;
+
+    @Autowired
     private MemoService memoService;
 
     @Autowired
-    private ReadingBookService readingBookService;
+    private ReadingBookRegistrationService readingBookRegistrationService;
 
     // TODO memoを返したい
     @PostMapping("/{id}/memos")
@@ -56,9 +63,16 @@ public class ReadingBookApiController {
             Principal principal) {
         String username = principal.getName();
         User user = userService.findByUsername(username);
-        String userId = user.getId();
         String bookId = params.get("bookId");
-        readingBookService.unregisterBook(userId, bookId);
-        return ResponseEntity.ok(Map.of("success", true));
+        Optional<Book> optBook = bookService.findBookById(bookId);
+
+        if (optBook.isPresent()) {
+            Book book = optBook.get();
+            readingBookRegistrationService.unregisterBook(book, user);
+            return ResponseEntity.ok(Map.of("success", true));
+        } else {
+            // TODO エラー処理
+            return ResponseEntity.ok(Map.of("success", false));
+        }
     }
 }

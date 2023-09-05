@@ -18,6 +18,7 @@ public class ReadingBookService {
     @Autowired
     private ReadingBookMapper readingBookMapper;
 
+    // TODO delete
     public void unregisterBook(String userId, String bookId) {
         readingBookMapper.unregisterBook(userId, bookId);
     }

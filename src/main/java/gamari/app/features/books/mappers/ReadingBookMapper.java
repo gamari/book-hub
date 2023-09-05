@@ -33,5 +33,5 @@ public interface ReadingBookMapper {
     int countByBookIdAndUserId(@Param("bookId") String bookId, @Param("userId") String userId);
 
     @Delete("DELETE FROM reading_books WHERE user_id = #{userId} AND book_id = #{bookId}")
-    void unregisterBook(@Param("userId") String userId, @Param("bookId") String bookId);
+    void unregisterBook(@Param("bookId") String bookId, @Param("userId") String userId);
 }
