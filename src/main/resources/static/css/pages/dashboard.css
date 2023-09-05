@@ -1,6 +1,8 @@
+@import "/css/styles.css";
 @import "/css/components/header.css";
 @import "/css/components/container.css";
-@import "/css/styles.css";
+@import "/css/components/contribution.css";
+@import "/css/components/bookshelf.css";
 
 /* ユーザーパネル */
 .user-panel-container {
@@ -11,44 +13,8 @@
   background-color: #fff;
 }
 
-/* 本棚関係 */
-.bookshelf-container {
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 16px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-}
-
-.bookshelf {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.book-panel {
+.activity-container {
   margin-top: 10px;
-  border: 1px solid #ccc;
-  padding: 16px;
-  text-align: center;
-  background-color: #f9f9f9;
-  cursor: pointer;
-}
-
-.book-title {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.book-details {
-  font-size: 12px;
-}
-
-.is-reading {
-  color: green;
-}
-
-.start-date,
-.end-date {
-  display: block;
+  display: flex;
+  flex-direction: row;
 }

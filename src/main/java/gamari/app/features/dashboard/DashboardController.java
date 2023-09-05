@@ -28,6 +28,9 @@ public class DashboardController extends BaseController {
         User user = this.getUserFromPrincipal(principal);
         List<ReadingBookWithThumbnail> readingBooks = readingBookQueryService
                 .findReadingBookWithThumbnailByUserId(user.getId());
+
+        // TODO 1ヶ月分の読書量を取得する
+
         model.addAttribute("readingBooks", readingBooks);
         return "pages/dashboard";
     }

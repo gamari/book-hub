@@ -9,5 +9,6 @@ public class Memo {
     private String id;
     private String readingBookId;
     private String content;
+    private String author;
     private Date createdAt;
 }

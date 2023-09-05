@@ -1,0 +1,42 @@
+.bookshelf-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.bookshelf {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 16px;
+
+  /* TODO 小さい時は一列で出す */
+}
+
+.book-panel {
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  padding: 16px;
+  text-align: center;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+.book-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.book-details {
+  font-size: 12px;
+}
+
+.is-reading {
+  color: green;
+}
+
+.start-date,
+.end-date {
+  display: block;
+}

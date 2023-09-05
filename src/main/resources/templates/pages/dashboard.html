@@ -14,8 +14,23 @@
         <div>
           <div>「〇〇さん」の読活履歴</div>
         </div>
-        <!-- TODO ログアウト機能 -->
-        <!-- TODO CSSを非ログインでも拾えるようにする -->
+
+        <div class="activity-container">
+          <div>
+            <!-- TODO 履歴を草として表示する -->
+            <div class="contribution-container">
+              <div class="day" data-count="0"></div>
+              <div class="day" data-count="2"></div>
+              <div class="day" data-count="5"></div>
+              <div class="day" data-count="10"></div>
+              <!-- TODO 3ヶ月分表示させる -->
+            </div>
+          </div>
+          <div>
+            <div>新規数 11</div>
+            <div>読了数 3</div>
+          </div>
+        </div>
       </div>
 
       <div class="bookshelf-container">
@@ -25,6 +40,7 @@
 
         <!-- 本棚 -->
         <div class="bookshelf">
+          <!-- Book-Item -->
           <div th:each="book : ${readingBooks}" class="book-panel">
             <div>
               <img th:src="${book.thumbnail}" />

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import gamari.app.features.base.BaseController;
 import gamari.app.features.books.models.Book;
 import gamari.app.features.books.models.Memo;
 import gamari.app.features.books.services.book.BookQueryService;
@@ -24,7 +25,7 @@ import gamari.app.features.users.services.UserService;
 
 @RestController
 @RequestMapping("/api/reading-books")
-public class ReadingBookApiController {
+public class ReadingBookApiController extends BaseController {
     @Autowired
     UserService userService;
 
@@ -39,23 +40,19 @@ public class ReadingBookApiController {
 
     // TODO memoを返したい
     @PostMapping("/{id}/memos")
-    public ResponseEntity<Memo> createMemo(@PathVariable String id, @RequestBody Memo memo) {
+    public ResponseEntity<Memo> createMemo(@PathVariable String id, @RequestBody Memo memo, Principal principal) {
+        User user = this.getUserFromPrincipal(principal);
+        System.out.println(user.getId());
+
         // TODO ReadingBookのユーザーのみ登録可能
+
         memo.setId(UUID.randomUUID().toString());
         memo.setReadingBookId(id);
         memo.setCreatedAt(new Date());
+        memo.setAuthor(user.getId());
         memoService.save(memo);
         return ResponseEntity.ok(memo);
     }
-
-    // TODO reading-bookじゃない？
-    // TODO 登録処理を追加する
-    // @PostMapping("/register")
-    // public ResponseEntity<Map<String, Boolean>> registerBook(@RequestBody
-    // ReadingBook readingBook) {
-    // bookService.registerBook(readingBook);
-    // return ResponseEntity.ok(Map.of("success", true));
-    // }
 
     @PostMapping("/unregister")
     public ResponseEntity<Map<String, Boolean>> unregisterBook(@RequestBody Map<String, String> params,

@@ -1,0 +1,35 @@
+/* Contributionのスタイル */
+.contribution-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 364px; /* 7 days x 52 weeks = 364 pixels */
+}
+
+.day {
+  width: 10px;
+  height: 10px;
+  margin: 1px;
+  background-color: #eee;
+}
+
+.day[data-count="0"] {
+  background-color: #eee;
+}
+
+.day[data-count="1"] {
+  background-color: #d6e685;
+}
+
+.day[data-count="2"] {
+  background-color: #8cc665;
+}
+
+.day[data-count="3"] {
+  background-color: #44a340;
+}
+
+.day[data-count="4"],
+.day[data-count="5"],
+.day[data-count="6"] {
+  background-color: #1e6823;
+}

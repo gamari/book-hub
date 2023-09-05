@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS memos (
     id UUID PRIMARY KEY NOT NULL,
     reading_book_id UUID NOT NULL,
     content TEXT NOT NULL,
+    author UUID NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (author) REFERENCES users(id),
     FOREIGN KEY (reading_book_id) REFERENCES reading_books(id)
 );
