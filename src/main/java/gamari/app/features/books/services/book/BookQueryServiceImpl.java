@@ -17,4 +17,9 @@ public class BookQueryServiceImpl implements BookQueryService {
     public Optional<Book> findBookById(String id) {
         return bookMapper.findBookById(id);
     }
+
+    @Override
+    public Optional<Book> findBookByIsbn(String isbn) {
+        return bookMapper.findBookByIsbn(isbn, isbn);
+    }
 }

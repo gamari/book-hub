@@ -2,7 +2,9 @@ package gamari.app.features.base.constants;
 
 public enum URL {
     ERROR_PAGE("redirect:/error_page"),
-    DASHBOARD("redirect:/dashboard");
+    BOOK_DETAIL("pages/books/detail"),
+    DASHBOARD("redirect:/dashboard"),
+    ;
 
     private final String url;
 

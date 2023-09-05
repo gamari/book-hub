@@ -6,4 +6,6 @@ import gamari.app.features.books.models.Book;
 
 public interface BookQueryService {
     Optional<Book> findBookById(String id);
+
+    Optional<Book> findBookByIsbn(String isbn);
 }

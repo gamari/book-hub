@@ -1,4 +1,4 @@
-package gamari.app.features.books;
+package gamari.app.features.books.controllers;
 
 import java.security.Principal;
 import java.util.List;

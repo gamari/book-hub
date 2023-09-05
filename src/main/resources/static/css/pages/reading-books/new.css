@@ -1,0 +1,17 @@
+@import "/css/components/header.css";
+@import "/css/components/container.css";
+@import "/css/styles.css";
+
+/* 検索結果 */
+#results {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+  gap: 60px;
+}
+
+.result {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
