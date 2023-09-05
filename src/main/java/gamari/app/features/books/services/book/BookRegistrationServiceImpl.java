@@ -1,6 +1,7 @@
 package gamari.app.features.books.services.book;
 
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,16 @@ public class BookRegistrationServiceImpl implements BookRegistrationService {
     }
 
     @Override
-    public Book save(Book book) {
+    public Book register(Book book) {
+        String isbn10 = book.getIsbn10();
+        String isbn13 = book.getIsbn13();
+
+        Optional<Book> optBook = findBookByIsbn(isbn10, isbn13);
+        if (optBook.isPresent()) {
+            return optBook.get();
+        }
+
+        book.setId(UUID.randomUUID().toString());
         bookMapper.save(book);
         return book;
     }

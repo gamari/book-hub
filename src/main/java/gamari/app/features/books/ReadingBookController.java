@@ -14,30 +14,35 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import gamari.app.features.base.BaseController;
+import gamari.app.features.base.constants.URL;
 import gamari.app.features.books.forms.ReadingBookForm;
 import gamari.app.features.books.models.Book;
 import gamari.app.features.books.models.Memo;
 import gamari.app.features.books.models.ReadingBook;
-import gamari.app.features.books.services.ReadingBookService;
 import gamari.app.features.books.services.book.BookQueryService;
 import gamari.app.features.books.services.book.BookRegistrationService;
 import gamari.app.features.books.services.memo.MemoService;
+import gamari.app.features.books.services.reading_book.ReadingBookQueryService;
+import gamari.app.features.books.services.reading_book.ReadingBookRegistrationService;
 import gamari.app.features.users.models.User;
 
 @Controller
 @RequestMapping("/reading-books")
 public class ReadingBookController extends BaseController {
     @Autowired
-    private BookRegistrationService bookRegistrationService;
-
-    @Autowired
     private BookQueryService bookQueryService;
 
     @Autowired
-    private MemoService memoService;
+    private BookRegistrationService bookRegistrationService;
 
     @Autowired
-    private ReadingBookService readingBookService;
+    private ReadingBookQueryService readingBookQueryService;
+
+    @Autowired
+    private ReadingBookRegistrationService readingBookRegistrationService;
+
+    @Autowired
+    private MemoService memoService;
 
     @GetMapping("/new")
     public String newReadingBook(Model model) {
@@ -47,15 +52,13 @@ public class ReadingBookController extends BaseController {
 
     @GetMapping("/{bookId}")
     public String showBookDetail(@PathVariable String bookId, Model model) {
-        Optional<ReadingBook> optReadingBook = readingBookService.findById(bookId);
+        Optional<ReadingBook> optReadingBook = readingBookQueryService.findReadingBookById(bookId);
 
         if (optReadingBook.isEmpty()) {
             return "redirect:/error_page";
         }
 
         ReadingBook readingBook = optReadingBook.get();
-        System.out.println(readingBook.getId());
-        System.out.println(readingBook.getBookId());
 
         Optional<Book> book = bookQueryService.findBookById(readingBook.getBookId());
         List<Memo> memos = memoService.findByReadingBookId(bookId);
@@ -69,29 +72,18 @@ public class ReadingBookController extends BaseController {
 
     /** 読書中登録処理。 */
     @PostMapping
-    public String createReadingBook(@ModelAttribute ReadingBookForm readingBookForm, Principal principal) {
+    public String registerReadingBook(@ModelAttribute ReadingBookForm readingBookForm, Principal principal) {
         User user = this.getUserFromPrincipal(principal);
 
-        String isbn10 = readingBookForm.getIsbn10();
-        String isbn13 = readingBookForm.getIsbn13();
+        Book newBook = readingBookForm.toBook();
+        Book book = bookRegistrationService.register(newBook);
 
-        Optional<Book> optBook = bookRegistrationService.findBookByIsbn(isbn10, isbn13);
-        Book book = optBook.orElseGet(() -> {
-            Book newBook = new Book();
-            newBook.setTitle(readingBookForm.getTitle());
-            newBook.setIsbn10(isbn10);
-            newBook.setIsbn13(isbn13);
-            newBook.setThumbnail(readingBookForm.getThumbnail());
-            bookRegistrationService.save(newBook);
-            return newBook;
-        });
-
-        if (readingBookService.isAlreadyReadingBook(book.getId(), user.getId())) {
-            return "redirect:/error_page";
+        if (readingBookQueryService.isBookRegisteredByUser(book.getId(), user)) {
+            return URL.ERROR_PAGE.getUrl();
         }
 
-        readingBookService.saveReadingBook(user, book);
-        return "redirect:/dashboard";
+        readingBookRegistrationService.registerBook(user, book);
+        return URL.DASHBOARD.getUrl();
     }
 
 }

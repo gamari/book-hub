@@ -7,5 +7,5 @@ import gamari.app.features.books.models.Book;
 public interface BookRegistrationService {
     Optional<Book> findBookByIsbn(String isbn10, String isbn13);
 
-    Book save(Book book);
+    Book register(Book book);
 }

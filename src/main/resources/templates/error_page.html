@@ -3,9 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>エラー発生</title>
+    <link rel="stylesheet" href="/css/pages/error_page.css" />
   </head>
   <body>
-    <div>エラー発生</div>
+    <div th:replace="components/header :: site-header"></div>
+
+    <div class="container">
+      <div>エラー発生</div>
+    </div>
   </body>
 </html>

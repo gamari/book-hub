@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import gamari.app.features.books.models.Book;
 import lombok.Data;
 
 // TODO isReadingをDoneにする
@@ -21,4 +22,13 @@ public class ReadingBookForm {
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date endDate;
+
+    public Book toBook() {
+        Book book = new Book();
+        book.setTitle(title);
+        book.setIsbn10(isbn10);
+        book.setIsbn13(isbn13);
+        book.setThumbnail(thumbnail);
+        return book;
+    }
 }

@@ -10,6 +10,8 @@ public interface ReadingBookQueryService {
     boolean isBookRegisteredByUser(String bookId, User user);
 
     int countReadingBooksByBookId(String bookId);
-    // Optional<ReadingBook> findById(String id);
-    // List<ReadingBook> findByUserId(String userId);
+
+    Optional<ReadingBook> findReadingBookById(String id);
+
+    List<ReadingBook> findReadingBookByUserId(String userId);
 }
