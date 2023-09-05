@@ -6,3 +6,22 @@
 body {
   background-color: #f9f9f9;
 }
+
+/* 共通 */
+.primary-color {
+  color: #00c4cc;
+}
+
+.primary-background-color {
+  background-color: #00c4cc;
+}
+
+/* Buttons */
+.link-button {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: white;
+  background-color: #00c4cc;
+}

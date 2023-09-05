@@ -4,16 +4,28 @@
   align-items: center;
   border-bottom: 1px solid #ccc;
   padding: 1em;
-  background-color: rgb(78, 175, 76);
   color: white;
 }
 
-.logo {
-  /* color: rgb(23, 158, 248); */
-  font-size: 24px;
-  font-weight: 700;
+/* Logo */
+.logo-container {
+  text-decoration: none;
 }
 
-.links {
+.logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: white;
+}
+
+/* Navigations */
+.navigations {
   font-size: 18px;
+}
+
+.nav {
+  background: white;
+  border-radius: 5px;
+  padding: 6px 12px;
+  text-decoration: none;
 }

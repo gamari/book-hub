@@ -18,6 +18,18 @@ public class ReadingBookService {
     @Autowired
     private ReadingBookMapper readingBookMapper;
 
+    public void unregisterBook(String userId, String bookId) {
+        readingBookMapper.unregisterBook(userId, bookId);
+    }
+
+    public boolean isBookRegisteredByUser(String bookId, String userId) {
+        return readingBookMapper.countReadingBooksByBookIdAndUser(bookId, userId) > 0;
+    }
+
+    public int countReadingBooksByBookId(String bookId) {
+        return readingBookMapper.countReadingBooksByBookId(bookId);
+    }
+
     public Optional<ReadingBook> findById(String id) {
         return readingBookMapper.findById(id);
     }

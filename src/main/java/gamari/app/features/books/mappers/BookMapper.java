@@ -3,6 +3,7 @@ package gamari.app.features.books.mappers;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -24,4 +25,5 @@ public interface BookMapper {
 
     @Insert("INSERT INTO books (id, title, isbn10, isbn13, author, published_date, genre, summary, thumbnail) VALUES (#{id}, #{title}, #{isbn10}, #{isbn13}, #{author}, #{publishedDate}, #{genre}, #{summary}, #{thumbnail})")
     int save(Book book);
+
 }

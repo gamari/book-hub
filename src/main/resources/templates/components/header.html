@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
   <head>
-    <!-- TODO CSSの共通化をしたい -->
+    <link rel="stylesheet" th:href="@{/css/components/header.css}" />
   </head>
 
   <body>
     <div th:fragment="site-header">
-      <div class="header">
-        <a href="/">
+      <div class="header primary-background-color">
+        <a href="/" class="logo-container">
           <div class="logo">Book Hub</div>
         </a>
-        <div class="links">
-          <a href="/dashboard">マイページ</a>
+
+        <div class="navigations">
+          <a href="/dashboard" class="nav">マイページ</a>
         </div>
       </div>
     </div>

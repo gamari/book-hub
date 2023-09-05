@@ -18,8 +18,12 @@
         <div>
           <h1 th:text="${reading_book.title}">書籍のタイトル</h1>
           <div>本棚に登録済み</div>
-          <!-- TODO まずこれをやる -->
-          <div>書籍の詳細ページへ</div>
+          <a
+            th:href="@{/books/{id}(id=${reading_book.bookId})}"
+            class="link-button"
+            >詳細ページへ</a
+          >
+
           <div>SHAREする</div>
         </div>
       </div>

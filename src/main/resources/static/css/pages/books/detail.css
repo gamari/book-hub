@@ -1,0 +1,14 @@
+@import "/css/components/header.css";
+@import "/css/components/container.css";
+@import "/css/styles.css";
+
+.book-detail-container {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
