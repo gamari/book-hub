@@ -1,4 +1,4 @@
-package gamari.app.features.books.services;
+package gamari.app.features.books.services.reading_book;
 
 import gamari.app.features.books.models.Book;
 import gamari.app.features.users.models.User;

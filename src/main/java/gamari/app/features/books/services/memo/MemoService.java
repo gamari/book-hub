@@ -1,4 +1,4 @@
-package gamari.app.features.books.services;
+package gamari.app.features.books.services.memo;
 
 import java.util.List;
 

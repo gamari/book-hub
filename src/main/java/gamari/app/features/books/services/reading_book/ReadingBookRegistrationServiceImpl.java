@@ -1,4 +1,4 @@
-package gamari.app.features.books.services;
+package gamari.app.features.books.services.reading_book;
 
 import org.springframework.beans.factory.annotation.Autowired;
 

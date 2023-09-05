@@ -21,8 +21,8 @@ import gamari.app.features.books.models.Book;
 import gamari.app.features.books.models.Memo;
 import gamari.app.features.books.models.ReadingBook;
 import gamari.app.features.books.services.BookService;
-import gamari.app.features.books.services.MemoService;
 import gamari.app.features.books.services.ReadingBookService;
+import gamari.app.features.books.services.memo.MemoService;
 import gamari.app.features.users.models.User;
 import gamari.app.features.users.services.UserService;
 
