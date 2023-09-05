@@ -8,10 +8,10 @@ import gamari.app.features.base.models.GoogleBooksResponse;
 import gamari.app.features.books.models.Book;
 
 @Service
-public class BookApiServiceImpl {
+public class BookApiServiceImpl implements BookApiService {
     private final String BASE_URL = "https://www.googleapis.com/books/v1/volumes?q=isbn:";
 
-    public Book getBookByIsbn(String isbn) {
+    public Book fetchBookByIsbn(String isbn) {
         RestTemplate restTemplate = new RestTemplate();
         String url = BASE_URL + isbn;
         GoogleBooksResponse response = restTemplate.getForObject(url, GoogleBooksResponse.class);

@@ -1,5 +1,7 @@
 package gamari.app.features.base.services;
 
+import gamari.app.features.books.models.Book;
+
 public interface BookApiService {
-    public String fetchBookByIsbn(String isbn);
+    public Book fetchBookByIsbn(String isbn);
 }

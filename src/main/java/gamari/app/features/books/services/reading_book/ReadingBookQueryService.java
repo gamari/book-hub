@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import gamari.app.features.books.models.ReadingBook;
+import gamari.app.features.books.models.ReadingBookWithThumbnail;
 import gamari.app.features.users.models.User;
 
 public interface ReadingBookQueryService {
@@ -14,4 +15,6 @@ public interface ReadingBookQueryService {
     Optional<ReadingBook> findReadingBookById(String id);
 
     List<ReadingBook> findReadingBookByUserId(String userId);
+
+    List<ReadingBookWithThumbnail> findReadingBookWithThumbnailByUserId(String userId);
 }

@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import gamari.app.features.books.models.ReadingBook;
+import gamari.app.features.books.models.ReadingBookWithThumbnail;
 
 @Mapper
 public interface ReadingBookMapper {
@@ -25,6 +26,12 @@ public interface ReadingBookMapper {
 
     @Select("SELECT * FROM reading_books where user_id = #{userId}")
     List<ReadingBook> findByUserId(String id);
+
+    @Select("SELECT rb.*, b.thumbnail" +
+            "    FROM reading_books rb" +
+            "    JOIN books b ON rb.book_id = b.id" +
+            "    WHERE rb.user_id = #{userId}")
+    List<ReadingBookWithThumbnail> findWithThumbnailByUserId(String userId);
 
     @Insert("INSERT INTO reading_books (id, user_id, book_id, title, is_reading, start_date, end_date) VALUES (#{id}, #{userId}, #{bookId}, #{title}, #{isReading}, #{startDate}, #{endDate})")
     void insert(ReadingBook readingBook);

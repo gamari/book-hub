@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import gamari.app.features.books.mappers.ReadingBookMapper;
 import gamari.app.features.books.models.ReadingBook;
+import gamari.app.features.books.models.ReadingBookWithThumbnail;
 import gamari.app.features.users.models.User;
 
 @Service
@@ -23,6 +24,11 @@ public class ReadingBookQueryServiceImpl implements ReadingBookQueryService {
     @Override
     public List<ReadingBook> findReadingBookByUserId(String userId) {
         return readingBookMapper.findByUserId(userId);
+    }
+
+    @Override
+    public List<ReadingBookWithThumbnail> findReadingBookWithThumbnailByUserId(String userId) {
+        return readingBookMapper.findWithThumbnailByUserId(userId);
     }
 
     @Override

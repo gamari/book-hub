@@ -1,5 +1,6 @@
 package gamari.app.features.dashboard;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,24 +10,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import gamari.app.features.base.BaseController;
 import gamari.app.features.books.models.ReadingBook;
+import gamari.app.features.books.models.ReadingBookWithThumbnail;
 import gamari.app.features.books.services.reading_book.ReadingBookQueryService;
 import gamari.app.features.users.models.User;
-import gamari.app.features.users.services.UserService;
+
+// TODO ページネーションを追加する
 
 @Controller
-public class DashboardController {
-    @Autowired
-    private UserService userService;
-
+public class DashboardController extends BaseController {
     @Autowired
     private ReadingBookQueryService readingBookQueryService;
 
     @GetMapping("/dashboard")
-    public String showDashboard(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        String username = userDetails.getUsername();
-        User user = userService.findByUsername(username);
-        List<ReadingBook> readingBooks = readingBookQueryService.findReadingBookByUserId(user.getId());
+    public String showDashboard(Model model, Principal principal) {
+        User user = this.getUserFromPrincipal(principal);
+        List<ReadingBookWithThumbnail> readingBooks = readingBookQueryService
+                .findReadingBookWithThumbnailByUserId(user.getId());
         model.addAttribute("readingBooks", readingBooks);
         return "pages/dashboard";
     }

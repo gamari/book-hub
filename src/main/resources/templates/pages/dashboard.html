@@ -26,6 +26,9 @@
         <!-- 本棚 -->
         <div class="bookshelf">
           <div th:each="book : ${readingBooks}" class="book-panel">
+            <div>
+              <img th:src="${book.thumbnail}" />
+            </div>
             <a
               th:href="@{/reading-books/{id}(id=${book.id})}"
               class="book-title"
