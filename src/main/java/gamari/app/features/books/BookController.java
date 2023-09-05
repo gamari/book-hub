@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import gamari.app.features.books.models.Book;
-import gamari.app.features.books.services.BookService;
-import gamari.app.features.books.services.ReadingBookService;
+import gamari.app.features.books.services.book.BookQueryService;
 import gamari.app.features.books.services.reading_book.ReadingBookQueryService;
 import gamari.app.features.users.models.User;
 import gamari.app.features.users.services.UserService;
@@ -20,10 +19,7 @@ import gamari.app.features.users.services.UserService;
 @Controller
 public class BookController {
     @Autowired
-    private BookService bookService;
-
-    @Autowired
-    private ReadingBookService readingBookService;
+    private BookQueryService bookQueryService;
 
     @Autowired
     private ReadingBookQueryService readingBookQueryService;
@@ -35,7 +31,7 @@ public class BookController {
     public String bookDetail(@PathVariable String id, Model model, Principal principal) {
         String username = principal.getName();
         User user = userService.findByUsername(username);
-        Optional<Book> optBook = bookService.findBookById(id);
+        Optional<Book> optBook = bookQueryService.findBookById(id);
 
         if (optBook.isPresent()) {
             Book book = optBook.get();
@@ -45,7 +41,6 @@ public class BookController {
             model.addAttribute("book", book);
             model.addAttribute("isReading", idReadingBook);
             model.addAttribute("numberOfPeopleReading", numberOfPeopleReading);
-            System.out.println(idReadingBook);
 
             return "pages/books/detail";
         } else {

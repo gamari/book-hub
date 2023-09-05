@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import gamari.app.features.books.models.Book;
 import gamari.app.features.books.models.Memo;
-import gamari.app.features.books.services.BookService;
-import gamari.app.features.books.services.ReadingBookService;
+import gamari.app.features.books.services.book.BookQueryService;
 import gamari.app.features.books.services.memo.MemoService;
 import gamari.app.features.books.services.reading_book.ReadingBookRegistrationService;
 import gamari.app.features.users.models.User;
@@ -30,7 +29,7 @@ public class ReadingBookApiController {
     UserService userService;
 
     @Autowired
-    BookService bookService;
+    BookQueryService bookQueryService;
 
     @Autowired
     private MemoService memoService;
@@ -64,7 +63,7 @@ public class ReadingBookApiController {
         String username = principal.getName();
         User user = userService.findByUsername(username);
         String bookId = params.get("bookId");
-        Optional<Book> optBook = bookService.findBookById(bookId);
+        Optional<Book> optBook = bookQueryService.findBookById(bookId);
 
         if (optBook.isPresent()) {
             Book book = optBook.get();

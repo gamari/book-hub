@@ -14,4 +14,6 @@ public class Book {
     private Date publishedDate;
     private String genre;
     private String summary;
+
+    /** フォームからBookインスタンスを作成する。 */
 }
