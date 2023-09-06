@@ -1,5 +1,6 @@
 package gamari.app.features.books.services.reading_book;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,4 +41,5 @@ public class ReadingBookQueryServiceImpl implements ReadingBookQueryService {
     public int countReadingBooksByBookId(String bookId) {
         return readingBookMapper.countReadingBooksByBookId(bookId);
     }
+
 }

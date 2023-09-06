@@ -41,7 +41,10 @@
               th:action="@{/reading-books/{id}/memos(id=${reading_book.id})}"
               method="post"
             >
-              <input type="text" name="content" />
+              <textarea
+                name="content"
+                placeholder="ページ数や感想..."
+              ></textarea>
               <input type="submit" value="メモを追加" />
             </form>
           </div>

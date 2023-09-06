@@ -25,6 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const formData = new FormData(memoForm);
         const content = formData.get("content");
+
+        console.log(content);
+        // TODO trim処理を入れたい
+        if (!content) return;
         console.log(memoForm)
 
         fetch(`/api/reading-books/${BOOK_ID}/memos`, {

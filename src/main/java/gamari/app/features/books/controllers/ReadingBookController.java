@@ -67,6 +67,8 @@ public class ReadingBookController extends BaseController {
         model.addAttribute("reading_book", readingBook);
         model.addAttribute("memos", memos);
 
+        System.out.println(memos);
+
         return "pages/reading-books/detail";
     }
 
