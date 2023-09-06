@@ -21,11 +21,25 @@ body {
 }
 
 /* Buttons */
+.button {
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border: 1px solid #ccc;
+}
+
+.register-button {
+  background-color: #00c4cc;
+  color: white;
+}
+
+/* リンク専用 */
 .link-button {
   display: inline-block;
   padding: 6px 12px;
   border-radius: 5px;
   text-decoration: none;
   color: white;
-  background-color: #00c4cc;
+  background-color: #717171;
 }

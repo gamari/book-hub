@@ -33,4 +33,8 @@ public class ReadingBookRegistrationServiceImpl implements ReadingBookRegistrati
         readingBookMapper.unregisterBook(book.getId(), user.getId());
     }
 
+    @Override
+    public void updateStatus(ReadingBook readingBook) {
+        readingBookMapper.updateStatus(readingBook);
+    }
 }

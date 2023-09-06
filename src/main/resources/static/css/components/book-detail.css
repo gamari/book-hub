@@ -1,0 +1,24 @@
+/* 詳細部分 */
+.book-detail-container {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  gap: 20px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.book-detail-container h1 {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* 選択 */
+.book-detail-select-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}

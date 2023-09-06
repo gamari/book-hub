@@ -32,3 +32,19 @@
   padding: 6px 12px;
   text-decoration: none;
 }
+
+.right-side-container {
+  display: flex;
+  flex-direction: row;
+  gap: 26px;
+  align-items: center;
+}
+
+.header-search-input {
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+  background: white;
+  outline: none;
+}

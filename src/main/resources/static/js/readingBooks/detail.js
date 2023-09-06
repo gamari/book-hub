@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const memoForm = document.getElementById("memo-form");
     const reviewForm = document.getElementById("review-form");
 
+
     memoTab.addEventListener("click", () => {
         memoTab.classList.add("active");
         reviewTab.classList.remove("active");
@@ -28,7 +29,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         console.log(content);
         // TODO trim処理を入れたい
-        if (!content) return;
+        if (!content) {
+            alert("メモを入力してください。")
+            return;
+        }
         console.log(memoForm)
 
         fetch(`/api/reading-books/${BOOK_ID}/memos`, {
@@ -48,6 +52,32 @@ document.addEventListener("DOMContentLoaded", () => {
                 memoListContainer.prepend(newMemo);
             })
             .catch((error) => {
+                console.error('Error:', error);
+            });
+    });
+
+    // ステータス更新処理
+    const statusSelect = document.getElementById('status-select');
+    statusSelect.addEventListener('change', function () {
+        const selectedStatus = statusSelect.value;
+
+        // Ajaxリクエストなどでサーバーにステータスの変更を通知
+        fetch('/reading-books/updateStatus', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                bookId: BOOK_ID,
+                status: selectedStatus
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                // 成功時の処理（オプション）
+            })
+            .catch(error => {
+                // エラーハンドリング
                 console.error('Error:', error);
             });
     });

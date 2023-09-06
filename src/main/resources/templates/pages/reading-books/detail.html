@@ -10,6 +10,7 @@
     <div th:replace="components/header :: site-header"></div>
 
     <div class="container" style="margin-top: 20px">
+      <!-- 書籍詳細 -->
       <div class="book-detail-container">
         <div>
           <img alt="image" th:src="${book.thumbnail}" />
@@ -17,14 +18,53 @@
 
         <div>
           <h1 th:text="${reading_book.title}">書籍のタイトル</h1>
-          <div>本棚に登録済み</div>
-          <a
-            th:href="@{/books/{id}(id=${reading_book.bookId})}"
-            class="link-button"
-            >詳細ページへ</a
-          >
+          <div>
+            <div>著者:</div>
+            <div>出版日:</div>
+          </div>
 
-          <div>SHAREする</div>
+          <div>
+            <div>レート</div>
+          </div>
+
+          <div class="book-detail-select-container">
+            <div>進行状況</div>
+            <select id="status-select" name="status">
+              <option
+                value="unread"
+                th:selected="${reading_book.status == 'unread'}"
+              >
+                未読
+              </option>
+              <option
+                value="reading"
+                th:selected="${reading_book.status == 'reading'}"
+              >
+                読書中
+              </option>
+              <option
+                value="done"
+                th:selected="${reading_book.status == 'done'}"
+              >
+                完了
+              </option>
+            </select>
+          </div>
+
+          <div class="book-detail-buttons">
+            <button class="button register-button">本棚から外す</button>
+
+            <a
+              th:href="@{/books/{id}(id=${reading_book.bookId})}"
+              class="link-button"
+              >書籍詳細へ</a
+            >
+          </div>
+
+          <div class="shares-container">
+            <div>Twitter</div>
+            <div>Twitter</div>
+          </div>
         </div>
       </div>
 
@@ -72,6 +112,7 @@
       </div>
     </div>
 
+    <!-- JS -->
     <script src="/js/readingBooks/detail.js"></script>
   </body>
 </html>

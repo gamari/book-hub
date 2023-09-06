@@ -2,15 +2,18 @@ package gamari.app.features.books.controllers;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import gamari.app.features.base.BaseController;
@@ -44,6 +47,27 @@ public class ReadingBookController extends BaseController {
     @Autowired
     private MemoService memoService;
 
+    @PostMapping("/updateStatus")
+    public ResponseEntity<?> updateStatus(@RequestBody Map<String, String> payload) {
+        String bookId = payload.get("bookId");
+        String status = payload.get("status");
+
+        System.out.println(bookId);
+        System.out.println(status);
+
+        Optional<ReadingBook> optReadingBook = readingBookQueryService.findReadingBookById(bookId);
+
+        if (optReadingBook.isEmpty()) {
+            return ResponseEntity.badRequest().body("Reading book not found");
+        }
+
+        ReadingBook readingBook = optReadingBook.get();
+        readingBook.setStatus(status);
+        readingBookRegistrationService.updateStatus(readingBook);
+
+        return ResponseEntity.ok().body("Status updated");
+    }
+
     @GetMapping("/new")
     public String newReadingBook(Model model) {
         model.addAttribute("readingBookForm", new ReadingBookForm());
@@ -66,8 +90,6 @@ public class ReadingBookController extends BaseController {
         model.addAttribute("book", book.get());
         model.addAttribute("reading_book", readingBook);
         model.addAttribute("memos", memos);
-
-        System.out.println(memos);
 
         return "pages/reading-books/detail";
     }

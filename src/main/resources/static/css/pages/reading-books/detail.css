@@ -1,6 +1,8 @@
+@import "/css/styles.css";
 @import "/css/components/header.css";
 @import "/css/components/container.css";
-@import "/css/styles.css";
+@import "/css/components/shares.css";
+@import "/css/components/book-detail.css";
 
 /* 共通 */
 .hidden {
@@ -9,23 +11,6 @@
 
 .active {
   background-color: #ddd;
-}
-
-/* 詳細部分 */
-.book-detail-container {
-  background-color: white;
-  display: flex;
-  flex-direction: row;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 16px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-}
-
-.book-detail-container h1 {
-  font-size: 20px;
-  font-weight: bold;
 }
 
 /* 入力欄 */

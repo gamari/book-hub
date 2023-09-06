@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import gamari.app.features.books.models.ReadingBook;
 import gamari.app.features.books.models.ReadingBookWithThumbnail;
@@ -41,4 +42,7 @@ public interface ReadingBookMapper {
 
     @Delete("DELETE FROM reading_books WHERE user_id = #{userId} AND book_id = #{bookId}")
     void unregisterBook(@Param("bookId") String bookId, @Param("userId") String userId);
+
+    @Update("UPDATE reading_books SET status = #{status} WHERE id = #{id}")
+    void updateStatus(ReadingBook readingBook);
 }

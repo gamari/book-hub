@@ -17,3 +17,9 @@
 - Google Books API
   - https://www.googleapis.com/books/v1/volumes?q=Java
 
+
+## コマンド
+
+### 実行
+
+- java -jar ...jar --spring.profiles.active=local
