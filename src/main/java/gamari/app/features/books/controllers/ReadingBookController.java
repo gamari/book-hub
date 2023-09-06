@@ -52,9 +52,6 @@ public class ReadingBookController extends BaseController {
         String bookId = payload.get("bookId");
         String status = payload.get("status");
 
-        System.out.println(bookId);
-        System.out.println(status);
-
         Optional<ReadingBook> optReadingBook = readingBookQueryService.findReadingBookById(bookId);
 
         if (optReadingBook.isEmpty()) {

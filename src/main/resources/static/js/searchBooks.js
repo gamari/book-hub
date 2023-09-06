@@ -1,3 +1,7 @@
+// グローバル
+let currentPage = 1;
+let totalPages = 0;
+
 function checkForEnter(event) {
     if (event.keyCode === 13) {
         searchBooks();
@@ -7,7 +11,7 @@ function checkForEnter(event) {
 // TODO リファクタリングする
 // 書籍情報を表示するための関数
 function createBookInfoDiv(book) {
-    const { title, industryIdentifiers, imageLinks, publishedDate } = book.volumeInfo;
+    const { title, industryIdentifiers, imageLinks, publishedDate, description } = book.volumeInfo;
 
     if (!industryIdentifiers?.length || !imageLinks || !publishedDate) {
         return null;
@@ -47,6 +51,10 @@ function createBookInfoDiv(book) {
     bookPublishedDate.innerText = publishedDate;
     rightDiv.appendChild(bookPublishedDate);
 
+    const bookDescription = document.createElement("p");
+    bookDescription.innerText = description;
+    rightDiv.appendChild(bookDescription);
+
     const bookForm = document.createElement("form");
     bookForm.action = "/reading-books";
     bookForm.method = "post";
@@ -58,6 +66,12 @@ function createBookInfoDiv(book) {
     titleInput.name = "title";
     titleInput.value = title;
     bookForm.appendChild(titleInput);
+
+    const descriptionInput = document.createElement("input");
+    descriptionInput.type = "hidden";
+    descriptionInput.name = "description";
+    descriptionInput.value = description;
+    bookForm.appendChild(descriptionInput);
 
     const isbn10Input = document.createElement("input");
     isbn10Input.type = "hidden";
@@ -96,14 +110,35 @@ function createNoResultsMessage() {
 function searchBooks() {
     const query = document.getElementById("searchQuery").value;
 
-    if (!query) return;
+    if (!query) {
+        alert("検索内容を入力してください")
+        return;
+    }
 
-    fetch(`/api/books/search?keyword=${query}`)
+    const searchResults = document.getElementById("results");
+    searchResults.innerHTML = "";
+
+    fetchData(query, currentPage);
+
+}
+
+function updatePageInfo() {
+    document.getElementById("pageInfo").innerText = `Page ${currentPage} of ${totalPages}`;
+
+    document.getElementById("prevButton").disabled = currentPage <= 1;
+    document.getElementById("nextButton").disabled = currentPage >= totalPages;
+}
+
+function fetchData(query, page) {
+    const searchResults = document.getElementById("results");
+    fetch(`/api/books/search?keyword=${query}&page=${page}`)
         .then(response => response.json())
         .then(data => {
-            const searchResults = document.getElementById("results");
-            searchResults.innerHTML = "";
             console.log(data);
+
+            if (data.totalItems) {
+                totalPages = Math.ceil(data.totalItems / 5);
+            }
 
             if (!data?.items?.length) {
                 searchResults.appendChild(createNoResultsMessage());
@@ -116,6 +151,8 @@ function searchBooks() {
                     searchResults.appendChild(bookInfo);
                 }
             });
+
+            updatePageInfo();
         })
         .catch(error => {
             console.error("Error:", error);
@@ -134,3 +171,17 @@ function openModal() {
 function addReadingBookByTitle() {
     // タイトルによってReadingBookテーブルに追加（サーバーサイドと通信）
 }
+
+// 初期化
+document.getElementById("nextButton").addEventListener("click", function () {
+    // TODO 制限を入れる
+    currentPage++;
+    searchBooks();
+});
+
+document.getElementById("prevButton").addEventListener("click", function () {
+    if (currentPage > 1) {
+        currentPage--;
+        searchBooks();
+    }
+});

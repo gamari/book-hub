@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS books (
     id UUID PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
+    description TEXT,
     isbn10 TEXT UNIQUE,
     isbn13 TEXT UNIQUE,
     author TEXT,
@@ -20,6 +21,7 @@ CREATE TABLE IF NOT EXISTS reading_books (
     user_id UUID NOT NULL,
     book_id UUID,
     title TEXT,
+    description TEXT,
     -- 0: unread, 1: reading, 2: done
     status TEXT NOT NULL DEFAULT 'unread',
     is_reading BOOLEAN NOT NULL,
@@ -27,13 +29,6 @@ CREATE TABLE IF NOT EXISTS reading_books (
     end_date DATE,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (book_id) REFERENCES books(id)
-);
-CREATE TABLE IF NOT EXISTS reading_histories (
-    id UUID PRIMARY KEY NOT NULL,
-    book_id UUID NOT NULL,
-    note TEXT,
-    commit_date TIMESTAMP NOT NULL,
-    FOREIGN KEY (book_id) REFERENCES reading_books(id)
 );
 CREATE TABLE IF NOT EXISTS memos (
     id UUID PRIMARY KEY NOT NULL,

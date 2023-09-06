@@ -9,6 +9,7 @@ public class ReadingBook {
     private String userId;
     private String bookId;
     private String title;
+    private String description;
     // TODO 削除
     private boolean isReading;
     // unread reading done

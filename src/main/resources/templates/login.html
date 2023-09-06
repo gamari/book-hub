@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
   <head>
-    <title>Spring Security Example</title>
+    <title>ログイン画面</title>
     <link rel="stylesheet" href="/css/pages/login.css" />
   </head>
+
   <body>
-    <div class="form-container">
+    <div class="container">
       <div th:if="${param.error}" class="message">
         ユーザー名またはパスワードが間違っています
       </div>
       <div th:if="${param.logout}" class="logout-message">
         ログアウトしました
       </div>
-      <form th:action="@{/login}" method="post">
+
+      <!-- TODO ユーザー作成成功時のメッセージを出す -->
+
+      <form th:action="@{/login}" method="post" class="form-container">
         <div class="form-field">
           <label for="username">ユーザー名</label>
           <input type="text" id="username" name="username" />

@@ -22,7 +22,7 @@ public interface BookMapper {
     @Select("SELECT * FROM books WHERE title LIKE #{keyword}")
     List<Book> findByTitleContaining(@Param("keyword") String keyword);
 
-    @Insert("INSERT INTO books (id, title, isbn10, isbn13, author, published_date, genre, summary, thumbnail) VALUES (#{id}, #{title}, #{isbn10}, #{isbn13}, #{author}, #{publishedDate}, #{genre}, #{summary}, #{thumbnail})")
+    @Insert("INSERT INTO books (id, title, description, isbn10, isbn13, author, published_date, genre, summary, thumbnail) VALUES (#{id}, #{title}, #{description}, #{isbn10}, #{isbn13}, #{author}, #{publishedDate}, #{genre}, #{summary}, #{thumbnail})")
     int save(Book book);
 
 }

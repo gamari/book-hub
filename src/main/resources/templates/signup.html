@@ -6,9 +6,10 @@
   </head>
 
   <body>
-    <div class="form-container">
-      <h2>ユーザー登録</h2>
-      <form action="/signup" method="post">
+    <div class="container">
+      <div class="title">ユーザー登録</div>
+
+      <form action="/signup" method="post" class="form-container">
         <div class="form-field">
           <label for="username">ユーザー名</label>
           <input type="text" id="username" name="username" required />
@@ -22,7 +23,7 @@
           <input type="password" id="password" name="password" required />
         </div>
         <div class="form-field">
-          <button type="submit">登録</button>
+          <input type="submit" value="登録" />
         </div>
       </form>
 
