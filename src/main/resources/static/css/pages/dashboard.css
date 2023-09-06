@@ -4,6 +4,39 @@
 @import "/css/components/activities.css";
 @import "/css/components/bookshelf.css";
 
+.logout-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: rgb(255, 167, 4);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.logout-button:hover {
+  background-color: rgb(255, 167, 4);
+  color: #fff;
+  cursor: pointer;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+.register-button {
+  padding: 8px 16px;
+  border-radius: 4px;
+  /* border: 1px solid #ccc; */
+  background-color: #00c4cc;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+}
+
 /* ユーザーパネル */
 .user-panel-container {
   margin-top: 20px;

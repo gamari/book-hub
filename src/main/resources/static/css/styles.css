@@ -12,6 +12,10 @@ body {
   color: #00c4cc;
 }
 
+.secondary-color {
+  color: rgb(255, 182, 46);
+}
+
 .primary-background-color {
   background-color: #00c4cc;
 }

@@ -12,12 +12,15 @@
 
     <div class="container">
       <div class="user-panel-container">
-        <div>「<span th:text="${username}"></span>さん」の読活履歴</div>
+        <div>
+          「<span th:text="${username}" class="activity-name"></span
+          >さん」の読活履歴
+        </div>
 
         <div class="activity-container">
           <div class="reading-activities-container">
             <h3>
-              <span th:text="${today}"></span>
+              <span th:text="${today}" class="activity-name"></span>
               の読書履歴
             </h3>
             <div class="reading-activities-box">
@@ -36,34 +39,61 @@
 
             <div>新規数 11</div>
             <div>読了数 3</div>
+
+            <div>
+              <form action="/logout" method="post">
+                <!-- TODO CSRF -->
+                <!-- <input type="hidden" name="_csrf" th:value="${_csrf.token}" /> -->
+                <button class="logout-button">ログアウト</button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="bookshelf-container">
-        <h2>書籍一覧</h2>
+        <div class="title-container">
+          <h2>本棚</h2>
 
-        <a href="/reading-books/new">本を登録</a>
+          <a href="/reading-books/new" class="register-button">本を登録</a>
+        </div>
 
         <!-- 本棚 -->
         <div class="bookshelf">
           <!-- Book-Item -->
           <div th:each="book : ${readingBooks}" class="book-panel">
             <div>
-              <img th:src="${book.thumbnail}" />
+              <img th:src="${book.thumbnail}" width="150px" height="200px" />
             </div>
             <a
               th:href="@{/reading-books/{id}(id=${book.id})}"
               class="book-title"
-              th:text="${book.title}"
-            ></a>
+            >
+              <span
+                th:if="${#strings.length(book.title) <= 16}"
+                th:text="${book.title}"
+              ></span>
+              <span
+                th:if="${#strings.length(book.title) > 16}"
+                th:text="${#strings.substring(book.title, 0, 16) + '...'}"
+              ></span>
+            </a>
             <div class="book-details">
-              <span th:if="${book.status==''}">未読</span>
               <span th:if="${book.status=='unread'}">未読</span>
               <span th:if="${book.status=='reading'}">読書中</span>
               <span th:if="${book.status=='done'}">完了</span>
-              <span class="start-date" th:text="${book.startDate}"></span>
-              <span class="end-date" th:text="${book.endDate}"></span>
+
+              <div>
+                <span>開始日: </span>
+                <span
+                  class="start-date"
+                  th:text="${#dates.format(book.startDate, 'yyyy/MM/dd')}"
+                ></span>
+              </div>
+              <span
+                class="end-date"
+                th:text="${#dates.format(book.endDate, 'yyyy/MM/dd HH:mm')}"
+              ></span>
             </div>
           </div>
         </div>

@@ -4,11 +4,12 @@ function checkForEnter(event) {
     }
 }
 
+// TODO リファクタリングする
 // 書籍情報を表示するための関数
 function createBookInfoDiv(book) {
-    const { title, industryIdentifiers, imageLinks } = book.volumeInfo;
+    const { title, industryIdentifiers, imageLinks, publishedDate } = book.volumeInfo;
 
-    if (!industryIdentifiers?.length || !imageLinks) {
+    if (!industryIdentifiers?.length || !imageLinks || !publishedDate) {
         return null;
     }
 
@@ -25,11 +26,13 @@ function createBookInfoDiv(book) {
     bookDiv.appendChild(rightDiv);
 
     const thumbnailLink = document.createElement("a");
+
     if (isbn_10) {
         thumbnailLink.href = `/books/isbn/${isbn_10}`;
     } else {
         thumbnailLink.href = `/books/isbn/${isbn_13}`;
     }
+
     leftDiv.appendChild(thumbnailLink);
     const thumbnailImg = document.createElement("img");
     thumbnailImg.src = thumbnail;
@@ -38,6 +41,11 @@ function createBookInfoDiv(book) {
     const bookTitle = document.createElement("h3");
     bookTitle.innerText = title;
     rightDiv.appendChild(bookTitle);
+
+    // TODO フォーマットを変更したい
+    const bookPublishedDate = document.createElement("p");
+    bookPublishedDate.innerText = publishedDate;
+    rightDiv.appendChild(bookPublishedDate);
 
     const bookForm = document.createElement("form");
     bookForm.action = "/reading-books";
@@ -95,6 +103,7 @@ function searchBooks() {
         .then(data => {
             const searchResults = document.getElementById("results");
             searchResults.innerHTML = "";
+            console.log(data);
 
             if (!data?.items?.length) {
                 searchResults.appendChild(createNoResultsMessage());

@@ -51,6 +51,10 @@
   background-color: #1a5f1e;
 }
 
+.activity-name {
+  font-family: 700;
+}
+
 /* 実績 */
 .activities-result-container {
   display: flex;

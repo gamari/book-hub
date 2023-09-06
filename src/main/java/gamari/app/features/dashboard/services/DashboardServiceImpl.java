@@ -49,6 +49,8 @@ public class DashboardServiceImpl implements DashboardService {
 
             SimpleDateFormat sdf2 = new SimpleDateFormat("d");
             activity.setDate(sdf2.format(date));
+            activity.setCount((int) Math.ceil((double) activity.getCount() / 5));
+
             fullActivitiesList.add(activity);
         }
 

@@ -24,8 +24,11 @@
 }
 
 .nav {
-  background: white;
+  color: white;
+  font-weight: 700;
+  background: rgb(255, 167, 4);
   border-radius: 5px;
+  font-size: 14px;
   padding: 6px 12px;
   text-decoration: none;
 }
