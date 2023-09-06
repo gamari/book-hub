@@ -9,7 +9,10 @@ public class ReadingBook {
     private String userId;
     private String bookId;
     private String title;
+    // TODO 削除
     private boolean isReading;
+    // unread reading done
+    private String status;
     private Date startDate;
     private Date endDate;
 }

@@ -1,6 +1,7 @@
 package gamari.app.features.dashboard;
 
 import java.security.Principal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -29,12 +30,15 @@ public class DashboardController extends BaseController {
     @GetMapping("/dashboard")
     public String showDashboard(Model model, Principal principal) {
         User user = this.getUserFromPrincipal(principal);
+
         List<ReadingBookWithThumbnail> readingBooks = readingBookQueryService
                 .findReadingBookWithThumbnailByUserId(user.getId());
 
         List<Activity> activities = dashboardService.calculateActivities(new Date(),
                 new Date(), user);
 
+        this.populateToday(model, "yyyy年M月");
+        this.populateUsername(model, user);
         model.addAttribute("readingBooks", readingBooks);
         model.addAttribute("activities", activities);
 

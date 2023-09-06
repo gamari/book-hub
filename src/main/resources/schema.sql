@@ -20,6 +20,8 @@ CREATE TABLE IF NOT EXISTS reading_books (
     user_id UUID NOT NULL,
     book_id UUID,
     title TEXT,
+    -- 0: unread, 1: reading, 2: done
+    status TEXT NOT NULL DEFAULT 'unread',
     is_reading BOOLEAN NOT NULL,
     start_date DATE NOT NULL,
     end_date DATE,

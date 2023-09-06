@@ -12,22 +12,28 @@
 
     <div class="container">
       <div class="user-panel-container">
-        <div>
-          <div>「〇〇さん」の読活履歴</div>
-        </div>
+        <div>「<span th:text="${username}"></span>さん」の読活履歴</div>
 
         <div class="activity-container">
           <div class="reading-activities-container">
-            <h3>今月の読書履歴</h3>
+            <h3>
+              <span th:text="${today}"></span>
+              の読書履歴
+            </h3>
             <div class="reading-activities-box">
               <div th:each="dayActivity : ${activities}">
-                <div class="day" th:data-count="${dayActivity.count}"></div>
+                <div
+                  class="day"
+                  th:data-count="${dayActivity.count}"
+                  th:text="${dayActivity.date}"
+                ></div>
               </div>
             </div>
           </div>
 
           <div class="activities-result-container">
             <h3>実績</h3>
+
             <div>新規数 11</div>
             <div>読了数 3</div>
           </div>
@@ -52,10 +58,10 @@
               th:text="${book.title}"
             ></a>
             <div class="book-details">
-              <span
-                class="is-reading"
-                th:text="${book.isReading ? '読書中' : '読了'}"
-              ></span>
+              <span th:if="${book.status==''}">未読</span>
+              <span th:if="${book.status=='unread'}">未読</span>
+              <span th:if="${book.status=='reading'}">読書中</span>
+              <span th:if="${book.status=='done'}">完了</span>
               <span class="start-date" th:text="${book.startDate}"></span>
               <span class="end-date" th:text="${book.endDate}"></span>
             </div>

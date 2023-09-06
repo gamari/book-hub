@@ -2,6 +2,7 @@ package gamari.app.features.base.libs;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 
 public class DateRange {
     private Date start;
@@ -36,5 +37,31 @@ public class DateRange {
 
     public Date getEnd() {
         return this.end;
+    }
+
+    public Iterable<Date> toIterable() {
+        return new Iterable<Date>() {
+            @Override
+            public Iterator<Date> iterator() {
+                return new Iterator<Date>() {
+                    private final Calendar currentCal = Calendar.getInstance();
+                    {
+                        currentCal.setTime(start);
+                    }
+
+                    @Override
+                    public boolean hasNext() {
+                        return currentCal.getTime().compareTo(end) <= 0;
+                    }
+
+                    @Override
+                    public Date next() {
+                        Date currentDate = currentCal.getTime();
+                        currentCal.add(Calendar.DATE, 1);
+                        return currentDate;
+                    }
+                };
+            }
+        };
     }
 }

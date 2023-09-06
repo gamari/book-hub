@@ -16,10 +16,15 @@
 }
 
 .day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 30px;
   height: 30px;
   margin: 1px;
   background-color: #eee;
+  color: #504f4f;
+  font-size: 12px;
 }
 
 .day[data-count="0"] {

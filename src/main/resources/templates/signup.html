@@ -2,27 +2,31 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>登録</title>
+    <link rel="stylesheet" href="/css/pages/signup.css" />
   </head>
 
   <body>
-    <h2>ユーザー登録</h2>
+    <div class="form-container">
+      <h2>ユーザー登録</h2>
+      <form action="/signup" method="post">
+        <div class="form-field">
+          <label for="username">ユーザー名</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="form-field">
+          <label for="email">メールアドレス</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-field">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div class="form-field">
+          <button type="submit">登録</button>
+        </div>
+      </form>
 
-    <form action="/signup" method="post">
-      <div>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required />
-      </div>
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-      <button type="submit">登録</button>
-    </form>
-
-    <a href="/login">Already have an account? Login here</a>
+      <a href="/login">ログインはこちら</a>
+    </div>
   </body>
 </html>

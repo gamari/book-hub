@@ -2,12 +2,10 @@ package gamari.app.features.dashboard.services;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,30 +22,34 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     public List<Activity> calculateActivities(Date start, Date end, User user) {
-        DateRange range = new DateRange(start, end);
+        DateRange dateRange = new DateRange(start, end);
+        Map<String, Activity> activitiesFromDb = fetchActivitiesFromDb(dateRange, user);
+        return fillActivities(dateRange, activitiesFromDb);
+    }
 
-        List<Activity> activitiesFromDb = memoMapper.countDailyMemosWithinDateRange(
-                range.getStart(), range.getEnd(), user.getId());
+    private Map<String, Activity> fetchActivitiesFromDb(DateRange dateRange, User user) {
+        List<Activity> activities = memoMapper.countDailyMemosWithinDateRange(
+                dateRange.getStart(), dateRange.getEnd(), user.getId());
 
         Map<String, Activity> activitiesMap = new HashMap<>();
-        for (Activity activity : activitiesFromDb) {
+        for (Activity activity : activities) {
             activitiesMap.put(activity.getDate(), activity);
+            System.out.println(activity.getDate());
         }
+        return activitiesMap;
+    }
 
+    private List<Activity> fillActivities(DateRange dateRange, Map<String, Activity> activitiesFromDb) {
         List<Activity> fullActivitiesList = new ArrayList<>();
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(range.getStart());
-
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        while (!cal.getTime().after(range.getEnd())) {
-            String dateStr = sdf.format(cal.getTime());
-            Activity activity = activitiesMap.getOrDefault(
-                    dateStr, new Activity(0, dateStr));
-            fullActivitiesList.add(activity);
+        for (Date date : dateRange.toIterable()) {
+            String dateStr = sdf.format(date);
+            Activity activity = activitiesFromDb.getOrDefault(dateStr, new Activity(0, dateStr));
 
-            cal.add(Calendar.DATE, 1);
+            SimpleDateFormat sdf2 = new SimpleDateFormat("d");
+            activity.setDate(sdf2.format(date));
+            fullActivitiesList.add(activity);
         }
 
         return fullActivitiesList;
