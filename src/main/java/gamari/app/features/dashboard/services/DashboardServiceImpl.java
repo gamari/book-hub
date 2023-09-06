@@ -1,12 +1,18 @@
 package gamari.app.features.dashboard.services;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import gamari.app.features.base.libs.DateRange;
 import gamari.app.features.books.mappers.MemoMapper;
 import gamari.app.features.memo.models.Activity;
 import gamari.app.features.users.models.User;
@@ -18,25 +24,32 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     public List<Activity> calculateActivities(Date start, Date end, User user) {
-        // TODO リファクタリングする
+        DateRange range = new DateRange(start, end);
+
+        List<Activity> activitiesFromDb = memoMapper.countDailyMemosWithinDateRange(
+                range.getStart(), range.getEnd(), user.getId());
+
+        Map<String, Activity> activitiesMap = new HashMap<>();
+        for (Activity activity : activitiesFromDb) {
+            activitiesMap.put(activity.getDate(), activity);
+        }
+
+        List<Activity> fullActivitiesList = new ArrayList<>();
+
         Calendar cal = Calendar.getInstance();
-        cal.setTime(start);
-        cal.set(Calendar.DATE, 1);
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
+        cal.setTime(range.getStart());
 
-        Date targetStart = cal.getTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-        cal.setTime(end);
-        cal.set(Calendar.DATE, cal.getActualMaximum(Calendar.DATE));
-        cal.set(Calendar.HOUR_OF_DAY, 23);
-        cal.set(Calendar.MINUTE, 59);
-        Date targetEnd = cal.getTime();
+        while (!cal.getTime().after(range.getEnd())) {
+            String dateStr = sdf.format(cal.getTime());
+            Activity activity = activitiesMap.getOrDefault(
+                    dateStr, new Activity(0, dateStr));
+            fullActivitiesList.add(activity);
 
-        List<Activity> activities = memoMapper.countDailyMemosWithinDateRange(targetStart, targetEnd, user.getId());
+            cal.add(Calendar.DATE, 1);
+        }
 
-        // TODO 変換処理
-
-        return activities;
+        return fullActivitiesList;
     }
 }

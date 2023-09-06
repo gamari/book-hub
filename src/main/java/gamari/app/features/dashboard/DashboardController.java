@@ -34,7 +34,6 @@ public class DashboardController extends BaseController {
 
         List<Activity> activities = dashboardService.calculateActivities(new Date(),
                 new Date(), user);
-        System.out.println(activities);
 
         model.addAttribute("readingBooks", readingBooks);
         model.addAttribute("activities", activities);

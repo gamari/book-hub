@@ -17,19 +17,17 @@
         </div>
 
         <div class="activity-container">
-          <div>
-            <!-- TODO 履歴を草として表示する -->
-            <div class="contribution-container">
-              <div th:each="activity : ${activities}" class="book-panel">
-                <div class="day" th:data-count="${activity.count}"></div>
+          <div class="reading-activities-container">
+            <h3>今月の読書履歴</h3>
+            <div class="reading-activities-box">
+              <div th:each="dayActivity : ${activities}">
+                <div class="day" th:data-count="${dayActivity.count}"></div>
               </div>
-              <!-- <div class="day" data-count="2"></div>
-              <div class="day" data-count="5"></div>
-              <div class="day" data-count="10"></div> -->
-              <!-- TODO 3ヶ月分表示させる -->
             </div>
           </div>
-          <div>
+
+          <div class="activities-result-container">
+            <h3>実績</h3>
             <div>新規数 11</div>
             <div>読了数 3</div>
           </div>
@@ -37,7 +35,7 @@
       </div>
 
       <div class="bookshelf-container">
-        <h1>書籍一覧</h1>
+        <h2>書籍一覧</h2>
 
         <a href="/reading-books/new">本を登録</a>
 

@@ -1,7 +1,7 @@
 @import "/css/styles.css";
 @import "/css/components/header.css";
 @import "/css/components/container.css";
-@import "/css/components/contribution.css";
+@import "/css/components/activities.css";
 @import "/css/components/bookshelf.css";
 
 /* ユーザーパネル */
@@ -11,10 +11,4 @@
   padding: 16px;
   border: 1px solid #ccc;
   background-color: #fff;
-}
-
-.activity-container {
-  margin-top: 10px;
-  display: flex;
-  flex-direction: row;
 }
