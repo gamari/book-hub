@@ -17,6 +17,21 @@ public class ReadingBookQueryServiceImpl implements ReadingBookQueryService {
     private ReadingBookMapper readingBookMapper;
 
     @Override
+    public boolean isBookRegisteredByUser(String bookId, User user) {
+        return readingBookMapper.countReadingBooksByBookIdAndUser(bookId, user.getId()) > 0;
+    }
+
+    @Override
+    public int countReadingBooksByBookId(String bookId) {
+        return readingBookMapper.countReadingBooksByBookId(bookId);
+    }
+
+    @Override
+    public int countReadingBookWithStatusDone(String userId) {
+        return readingBookMapper.countReadingBookWithStatusDone(userId);
+    }
+
+    @Override
     public Optional<ReadingBook> findReadingBookById(String id) {
         return readingBookMapper.findById(id);
     }
@@ -29,16 +44,6 @@ public class ReadingBookQueryServiceImpl implements ReadingBookQueryService {
     @Override
     public List<ReadingBookWithThumbnail> findReadingBookWithThumbnailByUserId(String userId) {
         return readingBookMapper.findWithThumbnailByUserId(userId);
-    }
-
-    @Override
-    public boolean isBookRegisteredByUser(String bookId, User user) {
-        return readingBookMapper.countReadingBooksByBookIdAndUser(bookId, user.getId()) > 0;
-    }
-
-    @Override
-    public int countReadingBooksByBookId(String bookId) {
-        return readingBookMapper.countReadingBooksByBookId(bookId);
     }
 
 }

@@ -16,33 +16,40 @@ import gamari.app.features.books.models.ReadingBookWithThumbnail;
 @Mapper
 public interface ReadingBookMapper {
 
-    @Select("SELECT COUNT(*) FROM reading_books WHERE book_id = #{bookId} AND user_id = #{userId}")
-    int countReadingBooksByBookIdAndUser(@Param("bookId") String bookId, @Param("userId") String userId);
+        // TODO 対象月を指定できるようにする
+        @Select("SELECT COUNT(*) FROM reading_books" +
+                        "  WHERE user_id = #{userId} " +
+                        "  AND status = 'done' " +
+                        "  AND strftime('%Y-%m', date(end_date/1000, 'unixepoch')) = strftime('%Y-%m', 'now')")
+        int countReadingBookWithStatusDone(String userId);
 
-    @Select("SELECT COUNT(*) FROM reading_books WHERE book_id = #{bookId}")
-    int countReadingBooksByBookId(String bookId);
+        @Select("SELECT COUNT(*) FROM reading_books WHERE book_id = #{bookId} AND user_id = #{userId}")
+        int countReadingBooksByBookIdAndUser(@Param("bookId") String bookId, @Param("userId") String userId);
 
-    @Select("SELECT * FROM reading_books where id = #{id}")
-    Optional<ReadingBook> findById(String id);
+        @Select("SELECT COUNT(*) FROM reading_books WHERE book_id = #{bookId}")
+        int countReadingBooksByBookId(String bookId);
 
-    @Select("SELECT * FROM reading_books where user_id = #{userId}")
-    List<ReadingBook> findByUserId(String id);
+        @Select("SELECT * FROM reading_books where id = #{id}")
+        Optional<ReadingBook> findById(String id);
 
-    @Select("SELECT rb.*, b.thumbnail" +
-            "    FROM reading_books rb" +
-            "    JOIN books b ON rb.book_id = b.id" +
-            "    WHERE rb.user_id = #{userId}")
-    List<ReadingBookWithThumbnail> findWithThumbnailByUserId(String userId);
+        @Select("SELECT * FROM reading_books where user_id = #{userId}")
+        List<ReadingBook> findByUserId(String id);
 
-    @Insert("INSERT INTO reading_books (id, user_id, book_id, title, is_reading, start_date, end_date) VALUES (#{id}, #{userId}, #{bookId}, #{title}, #{isReading}, #{startDate}, #{endDate})")
-    void insert(ReadingBook readingBook);
+        @Select("SELECT rb.*, b.thumbnail" +
+                        "    FROM reading_books rb" +
+                        "    JOIN books b ON rb.book_id = b.id" +
+                        "    WHERE rb.user_id = #{userId}")
+        List<ReadingBookWithThumbnail> findWithThumbnailByUserId(String userId);
 
-    @Select("SELECT COUNT(*) FROM reading_books WHERE book_id = #{bookId} AND user_id = #{userId}")
-    int countByBookIdAndUserId(@Param("bookId") String bookId, @Param("userId") String userId);
+        @Insert("INSERT INTO reading_books (id, user_id, book_id, title, is_reading, start_date, end_date) VALUES (#{id}, #{userId}, #{bookId}, #{title}, #{isReading}, #{startDate}, #{endDate})")
+        void insert(ReadingBook readingBook);
 
-    @Delete("DELETE FROM reading_books WHERE user_id = #{userId} AND book_id = #{bookId}")
-    void unregisterBook(@Param("bookId") String bookId, @Param("userId") String userId);
+        @Select("SELECT COUNT(*) FROM reading_books WHERE book_id = #{bookId} AND user_id = #{userId}")
+        int countByBookIdAndUserId(@Param("bookId") String bookId, @Param("userId") String userId);
 
-    @Update("UPDATE reading_books SET status = #{status} WHERE id = #{id}")
-    void updateStatus(ReadingBook readingBook);
+        @Delete("DELETE FROM reading_books WHERE user_id = #{userId} AND book_id = #{bookId}")
+        void unregisterBook(@Param("bookId") String bookId, @Param("userId") String userId);
+
+        @Update("UPDATE reading_books SET status = #{status}, start_date = #{startDate}, end_date = #{endDate} WHERE id = #{id}")
+        void updateStatus(ReadingBook readingBook);
 }

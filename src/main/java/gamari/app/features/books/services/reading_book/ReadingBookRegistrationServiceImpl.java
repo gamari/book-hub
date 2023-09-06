@@ -35,6 +35,17 @@ public class ReadingBookRegistrationServiceImpl implements ReadingBookRegistrati
 
     @Override
     public void updateStatus(ReadingBook readingBook) {
+        System.out.println(readingBook.getStatus());
+        if (readingBook.getStatus().equals("done")) {
+            readingBook.setEndDate(new Date());
+        } else if (readingBook.getStatus().equals("reading")) {
+            readingBook.setStartDate(new Date());
+            readingBook.setEndDate(null);
+        } else {
+            readingBook.setStartDate(null);
+            readingBook.setEndDate(null);
+        }
+
         readingBookMapper.updateStatus(readingBook);
     }
 }

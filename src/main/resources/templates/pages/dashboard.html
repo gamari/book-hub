@@ -35,10 +35,16 @@
           </div>
 
           <div class="activities-result-container">
-            <h3>実績</h3>
+            <h3>今月の実績</h3>
 
-            <div>新規数 11</div>
-            <div>読了数 3</div>
+            <div>
+              <span>新規数</span>
+              <span>0</span>
+            </div>
+            <div>
+              <span>読了数</span>
+              <span th:text="${doneCount}"></span>
+            </div>
 
             <div>
               <form action="/logout" method="post">
@@ -60,6 +66,7 @@
 
         <!-- 本棚 -->
         <div class="bookshelf">
+          <!-- TODO 何も無い場合に表示させる -->
           <!-- Book-Item -->
           <div th:each="book : ${readingBooks}" class="book-panel">
             <div>

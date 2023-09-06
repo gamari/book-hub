@@ -12,6 +12,8 @@ public interface ReadingBookQueryService {
 
     int countReadingBooksByBookId(String bookId);
 
+    int countReadingBookWithStatusDone(String userId);
+
     Optional<ReadingBook> findReadingBookById(String id);
 
     List<ReadingBook> findReadingBookByUserId(String userId);

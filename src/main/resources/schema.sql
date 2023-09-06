@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS reading_books (
     -- 0: unread, 1: reading, 2: done
     status TEXT NOT NULL DEFAULT 'unread',
     is_reading BOOLEAN NOT NULL,
-    start_date DATE NOT NULL,
+    start_date DATE,
     end_date DATE,
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (book_id) REFERENCES books(id)

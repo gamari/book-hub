@@ -37,10 +37,15 @@ public class DashboardController extends BaseController {
         List<Activity> activities = dashboardService.calculateActivities(new Date(),
                 new Date(), user);
 
+        int doneCount = readingBookQueryService.countReadingBookWithStatusDone(user.getId());
+
+        // TODO アクティビティの計算をする
+
         this.populateToday(model, "yyyy年M月");
         this.populateUsername(model, user);
         model.addAttribute("readingBooks", readingBooks);
         model.addAttribute("activities", activities);
+        model.addAttribute("doneCount", doneCount);
 
         return "pages/dashboard";
     }
