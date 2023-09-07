@@ -40,7 +40,7 @@ public class BookApiController {
                     .setStartIndex(startIndex)
                     .setLangRestrict("ja")
                     .addToken(googleToken)
-                    .setCountry("jp")
+                    // .setCountry("jp")
                     // .orderByNewest()
                     .orderByRelevance();
 

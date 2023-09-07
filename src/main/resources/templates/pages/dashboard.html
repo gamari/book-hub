@@ -72,35 +72,54 @@
             <div>
               <img th:src="${book.thumbnail}" width="150px" height="200px" />
             </div>
-            <a
-              th:href="@{/reading-books/{id}(id=${book.id})}"
-              class="book-title"
-            >
-              <span
-                th:if="${#strings.length(book.title) <= 16}"
-                th:text="${book.title}"
-              ></span>
-              <span
-                th:if="${#strings.length(book.title) > 16}"
-                th:text="${#strings.substring(book.title, 0, 16) + '...'}"
-              ></span>
-            </a>
-            <div class="book-details">
-              <span th:if="${book.status=='unread'}">未読</span>
-              <span th:if="${book.status=='reading'}">読書中</span>
-              <span th:if="${book.status=='done'}">完了</span>
 
-              <div>
-                <span>開始日: </span>
+            <div class="mt-2 mb-2">
+              <span
+                th:if="${book.status=='unread'}"
+                class="book-status book-status-unread"
+                >未読</span
+              >
+              <span
+                th:if="${book.status=='reading'}"
+                class="book-status book-status-reading"
+                >読書中</span
+              >
+              <span
+                th:if="${book.status=='done'}"
+                class="book-status book-status-done"
+                >完了</span
+              >
+            </div>
+
+            <div>
+              <a
+                th:href="@{/reading-books/{id}(id=${book.id})}"
+                class="book-title"
+              >
                 <span
-                  class="start-date"
+                  th:if="${#strings.length(book.title) <= 16}"
+                  th:text="${book.title}"
+                ></span>
+                <span
+                  th:if="${#strings.length(book.title) > 16}"
+                  th:text="${#strings.substring(book.title, 0, 16) + '...'}"
+                ></span>
+              </a>
+            </div>
+
+            <div class="book-date-container mt-2">
+              <div class="book-date">
+                <span>開始日</span>
+                <span
                   th:text="${#dates.format(book.startDate, 'yyyy/MM/dd')}"
                 ></span>
               </div>
-              <span
-                class="end-date"
-                th:text="${#dates.format(book.endDate, 'yyyy/MM/dd HH:mm')}"
-              ></span>
+              <div class="book-date">
+                <span>読了日</span>
+                <span
+                  th:text="${#dates.format(book.endDate, 'yyyy/MM/dd HH:mm')}"
+                ></span>
+              </div>
             </div>
           </div>
         </div>

@@ -103,9 +103,7 @@
 
       <div class="memo-list-container">
         <div th:each="memo : ${memos}">
-          <div class="memo-item">
-            <span th:text="${memo.content}"></span>
-          </div>
+          <div th:text="${memo.content}" class="memo-item"></div>
         </div>
 
         <div th:if="${#lists.isEmpty(memos)}">メモを追加してみましょう</div>

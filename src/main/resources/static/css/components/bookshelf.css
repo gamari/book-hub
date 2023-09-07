@@ -33,11 +33,44 @@
   font-size: 12px;
 }
 
-.is-reading {
-  color: green;
+/* ステータス */
+.book-status {
+  padding: 3px 6px;
+  font-size: 12px;
+  border-radius: 2px;
 }
 
-.start-date,
-.end-date {
-  display: block;
+.book-status-unread {
+  color: rgb(122, 122, 122);
+  background-color: white;
+  font-weight: 700;
+  border: 1px solid rgb(122, 122, 122);
+}
+
+.book-status-reading {
+  background-color: #00c4cc;
+  color: white;
+  font-weight: bold;
+  border: 1px solid #00c4cc;
+}
+
+.book-status-done {
+  background-color: rgb(122, 122, 122);
+  color: white;
+  border: 1px solid rgb(122, 122, 122);
+}
+
+/* 開始日 */
+.book-date-container {
+}
+
+.book-date {
+  font-size: 12px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 75%;
 }
